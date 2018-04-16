@@ -6,10 +6,10 @@
     <meta name="description" content="">
     <meta name="keywords" content="webxr-boilerplate,webvr,webxr,boilerplate-application,starter-kit,aframe,aframevr,aframexr,aframe-vr,aframe-boilerplate,webpack,webpack-boilerplate,sass,pwa,service-workers">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/static/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/static/images/icons/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/static/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/static/images/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/static/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/static/icons/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#24caff">
     <meta name="msapplication-config" content="assets/static/browserconfig.xml">
     <meta name="theme-color" content="#ee295f">
@@ -26,6 +26,20 @@
     <!-- common -->
     <link rel="stylesheet" type="text/css" href="style/app-theme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- GAR Tracking -->
+    <script src="https://poc.virtuleap.com/library/gar-calculator-aframe.min.js"></script> 
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98983582-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-98983582-2');
+    </script>
+
 
     <script src="js/vendors.js"></script>
     <script src="js/app.js"></script>
@@ -63,7 +77,7 @@
     </div>
 
 </div><a-scene antialias="true">
-  <a-assets timeout="1500">
+  <a-assets>
       <!-- Vonage Colors -->
       <a-mixin id="keyblue" material="flatShading:true; color:#0077C8"></a-mixin>
       <a-mixin id="keyblue-transparent" material="flatShading:true; color:#0077C8; opacity:0.85"></a-mixin>
@@ -171,10 +185,9 @@
       <img id="centertexture" src="assets/static/images/centertexture.jpg" />
       <img id="labelplatform" src="assets/static/images/modelplatform.jpg" />
       
-      <img id="panel-btn-init" src="assets/static/images/panel-btn.png" />
-      <img id="panel-btn-hover" src="assets/static/images/panel-btn-hover.png" />
-      <img id="panel-btn-click" src="assets/static/images/panel-btn-click.png" />
       <img id="bookmark-btn-label" src="assets/static/images/bookmark-btn-label.png" />
+      <img id="bookmark-btn-label-hover" src="assets/static/images/bookmark-btn-label-hover.png" />
+      <img id="bookmark-btn-label-click" src="assets/static/images/bookmark-btn-label-click.png" />
       
       <img id="intro-cardboard" src="assets/static/images/intro-cardboard.png"  />
       <img id="intro-gearvr" src="assets/static/images/intro-gearvr.png"  />
@@ -194,12 +207,13 @@
        
       <a-asset-item id="background-snd" src="assets/static/audio/music.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="panel-btn-hover-snd" src="assets/static/audio/hover.mp3" response-type="arraybuffer"></a-asset-item>
-      <a-asset-item id="panel-btn-click-snd" src="assets/static/audio/click1.mp3" response-type="arraybuffer"></a-asset-item>
-      <a-asset-item id="teleport-snd" src="assets/static/audio/teleport.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="panel-btn-click-snd" src="assets/static/audio/click.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="trunk-open-snd" src="assets/static/audio/trunk.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="trunk-coin-snd" src="assets/static/audio/coin.mp3" response-type="arraybuffer"></a-asset-item>
       <!-- END AUDIO -->
       
+      <!-- UCaaS CPaaS -->
+      <video id="ucaas_video" loop="false" src="assets/static/video/ucaas.mp4"></video>
       
       <a-asset-item id="ucaascpaas-obj" src="assets/static/models/ucaascpaas.obj"></a-asset-item>
       <a-asset-item id="ucaascpaas-mtl" src="assets/static/models/ucaascpaas.mtl"></a-asset-item>
@@ -210,6 +224,7 @@
       
       
       <!-- CRM -->
+      <video id="crm_video" loop="false" src="assets/static/video/crm.mp4"></video>
       
       <a-asset-item id="crm-obj" src="assets/static/models/crm.obj"></a-asset-item>
       <a-asset-item id="crm-mtl" src="assets/static/models/crm.mtl"></a-asset-item>
@@ -258,6 +273,10 @@
       <img id="panel-contactcenter" src="assets/static/images/contactcenter/contactcenterpanel.png" />
       <img id="panel-contactcenter-btn-label-1" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-1.png" />
       <img id="panel-contactcenter-btn-label-2" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-2.png" />
+      <img id="panel-contactcenter-btn-label-1-hover" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-1-hover.png" />
+      <img id="panel-contactcenter-btn-label-2-hover" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-2-hover.png" />
+      <img id="panel-contactcenter-btn-label-1-click" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-1-click.png" />
+      <img id="panel-contactcenter-btn-label-2-click" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-2-click.png" />
       
       <img id="contactcenterlabel-bm" src="assets/static/images/contactcenter/contactcenterlabel-bm.png" />
       <img id="contactcenterlabel" src="assets/static/images/contactcenter/contactcenterlabel.png" />
@@ -269,6 +288,8 @@
       
       <img id="panel-smartwan" src="assets/static/images/smartwan/smartwanpanel.png" />
       <img id="panel-smartwan-btn-label" src="assets/static/images/smartwan/smartwanpanel-btn-label.png" />
+      <img id="panel-smartwan-btn-label-hover" src="assets/static/images/smartwan/smartwanpanel-btn-label-hover.png" />
+      <img id="panel-smartwan-btn-label-click" src="assets/static/images/smartwan/smartwanpanel-btn-label-click.png" />
       
       <img id="smartwanlabel-bm" src="assets/static/images/smartwan/smartwanlabel-bm.png" />
       <img id="smartwanlabel" src="assets/static/images/smartwan/smartwanlabel.png" />
@@ -305,12 +326,16 @@
       <img id="panel-chime" src="assets/static/images/chime/chimepanel.png" />
       <img id="panel-chime-btn-label-1" src="assets/static/images/chime/chimepanel-btn-label-1.png" />
       <img id="panel-chime-btn-label-2" src="assets/static/images/chime/chimepanel-btn-label-2.png" />
+      <img id="panel-chime-btn-label-1-hover" src="assets/static/images/chime/chimepanel-btn-label-1-hover.png" />
+      <img id="panel-chime-btn-label-2-hover" src="assets/static/images/chime/chimepanel-btn-label-2-hover.png" />
+      <img id="panel-chime-btn-label-1-click" src="assets/static/images/chime/chimepanel-btn-label-1-click.png" />
+      <img id="panel-chime-btn-label-2-click" src="assets/static/images/chime/chimepanel-btn-label-2-click.png" />
       
       <img id="amazonchimelabel-bm" src="assets/static/images/chime/amazonchimelabel-bm.png" />
       <img id="amazonchimelabel" src="assets/static/images/chime/amazonchimelabel.png" />
       
-      <img id="ani-screen-base" src="assets/static/images/ani/chime-screen-base.gif" />
-      <img id="ani-screen-call" src="assets/static/images/ani/chime-screen-call.png" />
+      <img id="ani-screen-base" src="assets/static/images/chime/chime-screen-base.gif" />
+      <img id="ani-screen-call" src="assets/static/images/chime/chime-screen-call.png" />
       <!-- end Chime -->
       
       <!-- Vonage Reach -->
@@ -350,24 +375,25 @@
       <img id="panel-vonagereach" src="assets/static/images/reach/vonagereachpanel.png" />
       <img id="panel-vonagereach-btn-label-1" src="assets/static/images/reach/vonagereachpanel-btn-label-1.png" />
       <img id="panel-vonagereach-btn-label-2" src="assets/static/images/reach/vonagereachpanel-btn-label-2.png" />
+      <img id="panel-vonagereach-btn-label-1-hover" src="assets/static/images/reach/vonagereachpanel-btn-label-1-hover.png" />
+      <img id="panel-vonagereach-btn-label-2-hover" src="assets/static/images/reach/vonagereachpanel-btn-label-2-hover.png" />
+      <img id="panel-vonagereach-btn-label-1-click" src="assets/static/images/reach/vonagereachpanel-btn-label-1-click.png" />
+      <img id="panel-vonagereach-btn-label-2-click" src="assets/static/images/reach/vonagereachpanel-btn-label-2-click.png" />
       
       <img id="vonagereachlabel-bm" src="assets/static/images/reach/vonagereachlabel-bm.png" />
       <img id="vonagereachlabel" src="assets/static/images/reach/vonagereachlabel.png" />
       
-      <img id="ani-flatphone" src="assets/static/images/ani/flatphone.jpg" />
+      <img id="ani-flatphone" src="assets/static/images/reach/flatphone.jpg" />
       <!-- end Vonage Reach -->
       
       <!-- SIP Trunking -->
       <video id="sip_video" loop="false" src="assets/static/video/sip.mp4"></video>
-      <!-- UCaaS CPaaS -->
-      <video id="ucaas_video" loop="false" src="assets/static/video/ucaas.mp4"></video>
-      <!-- CRM -->
-      <video id="crm_video" loop="false" src="assets/static/video/crm.mp4"></video>
-      
-      
       <img id="siptrunkinglabel-bm" src="assets/static/images/sip/siptrunkinglabel-bm.png" />
       <img id="siptrunkinglabel" src="assets/static/images/sip/siptrunkinglabel.png" />
-      <!-- end SIP Trunking --></a-assets>
+      <!-- end SIP Trunking -->
+      
+      
+  </a-assets>
   
   <a-light type="directional" color="#eee" intensity="0.5" position="0 4 2"></a-light>
   <a-light type="ambient" color="#eee"></a-light><a-sky src="#sky"></a-sky><!-- Background Music & sounds-->
@@ -462,6 +488,7 @@
       <a-entity id="funnel"
           geometry="primitive:cylinder; height:90; radius:4.75;" mixin="lightblue-transparent" material="opacity:0.125"
           animation="property: rotation; to: 0 360; dur: 10000; easing: linear; autoplay: true; loop:true"
+          gar-calculator-element="modelID:1763-BB3733;experience_id:FEEC-CA178D;"
           >
           <a-entity geometry="primitive:cylinder; height:70; radius:0.5;" mixin="darkblue-transparent" position="0 0 0">
           </a-entity>
@@ -1507,306 +1534,446 @@
       ></a-entity>
       <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
       <!-- end LABEL -->
-  </a-entity><!-- BEGIN CONTACT CENTER  -->
+  </a-entity>BEGIN CONTACT CENTER  -->
   <a-entity id="contact-center" position="-7.4 0.5 -4.3">
-      <a-entity 
-        obj-model="obj: #contactcenter-obj; mtl: #contactcenter-mtl"
-        scale="1.5 1.5 1"
-        position="-2.22 0 1.42"
-        rotation="0 122.5 0"
-      ></a-entity>
-      <a-entity id="logos"
-        position="0 1.3 0"
-        >    
-        <a-entity position="-0.13 0 0.92"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #messenger-png"></a-entity><a-entity mixin="iconplaneback" material="src: #messenger-png"></a-entity>
-        </a-entity>           
+    <a-entity 
+      obj-model="obj: #contactcenter-obj; mtl: #contactcenter-mtl"
+      scale="1.5 1.5 1"
+      position="-2.22 0 1.42"
+      rotation="0 122.5 0"
+      gar-calculator-element="modelID:DE85-EB3654;experience_id:FEEC-CA178D;"    
+    ></a-entity>
+    <a-entity id="logos"
+      position="0 1.3 0"
+      >    
+      <a-entity position="-0.13 0 0.92"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #messenger-png"></a-entity><a-entity mixin="iconplaneback" material="src: #messenger-png"></a-entity>
+      </a-entity>           
   
-        <a-entity position="-0.62 0 -0.41"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #line-png"></a-entity><a-entity mixin="iconplaneback" material="src: #line-png"></a-entity>
-        </a-entity>
-  
-        <a-entity position="0.38 0 0.6"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #viber-png"></a-entity><a-entity mixin="iconplaneback" material="src: #viber-png"></a-entity>
-        </a-entity>            
-  
-        <a-entity position="-0.12 0 -0.74"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #wechat-png"></a-entity><a-entity mixin="iconplaneback" material="src: #wechat-png"></a-entity>
-        </a-entity>          
-  
-        <a-entity position="0.86 0 0.25"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #whatsapp-png"></a-entity><a-entity mixin="iconplaneback" material="src: #whatsapp-png"></a-entity>
-        </a-entity>             
-  
-        <a-entity position="0.4 0 -1.05"
-          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
-        >
-          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #workplace-png"></a-entity><a-entity mixin="iconplaneback" material="src: #workplace-png"></a-entity>
-        </a-entity>
+      <a-entity position="-0.62 0 -0.41"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #line-png"></a-entity><a-entity mixin="iconplaneback" material="src: #line-png"></a-entity>
       </a-entity>
   
+      <a-entity position="0.38 0 0.6"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #viber-png"></a-entity><a-entity mixin="iconplaneback" material="src: #viber-png"></a-entity>
+      </a-entity>            
   
-      <!-- animation block -->
-      <!-- skills-demo -->
+      <a-entity position="-0.12 0 -0.74"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #wechat-png"></a-entity><a-entity mixin="iconplaneback" material="src: #wechat-png"></a-entity>
+      </a-entity>          
   
-      <a-entity id="contactcenterskillsdemo" animation-timeline="timeline: #skillsDemoTimeline; startEvents: contactcenter-skills-demo-play"></a-entity>
-      <a-timeline id="skillsDemoTimeline">
-          <a-timeline-animation select="#product_ccenter" name="shiftout"></a-timeline-animation>
+      <a-entity position="0.86 0 0.25"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #whatsapp-png"></a-entity><a-entity mixin="iconplaneback" material="src: #whatsapp-png"></a-entity>
+      </a-entity>             
   
-          <a-timeline-group>
-              <a-timeline-animation select="#skills-center-holder" name="show"></a-timeline-animation>
-              <a-timeline-animation select="#center-aibot" name="turn" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#center-aibot" name="moveoff" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#center-aibot" name="moveout" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#aibot" name="popout" offset="0"></a-timeline-animation>
-          </a-timeline-group>
-  
-  
-          <a-timeline-group>
-              <a-timeline-animation select="#language-gate" name="popup" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#language-english" name="popup" offset="500"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep1" name="popup" offset="1500"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep1" name="shoot" offset="1500"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep2" name="popup" offset="1800"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep2" name="shoot" offset="1800"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep3" name="popup" offset="2100"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep3" name="shoot" offset="2100"></a-timeline-animation>
-          </a-timeline-group>
-  
-          <a-timeline-group>
-              <a-timeline-animation select="#center-singlerep1" name="green" offset="300"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep2" name="yellow" offset="300"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep3" name="yellow" offset="300"></a-timeline-animation>
-          </a-timeline-group>
+      <a-entity position="0.4 0 -1.05"
+        animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+      >
+        <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #workplace-png"></a-entity><a-entity mixin="iconplaneback" material="src: #workplace-png"></a-entity>
+      </a-entity>
+    </a-entity>
   
   
-          <a-timeline-group>
-              <a-timeline-animation select="#center-singlerep1" name="yellow" offset="300"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep2" name="green" offset="300"></a-timeline-animation>
-              <a-timeline-animation select="#center-singlerep3" name="red" offset="300"></a-timeline-animation>
-          </a-timeline-group>
+    <!-- animation block -->
+  
+    <!-- shared blocks -->
+    <a-entity id="shared"
+      position="3 1 1.6" scale="1 1 1" rotation="0 60 0"
+      >
+      <a-entity id="clientfunnel"
+        geometry="primitive:cylinder; radius:0.5; height:2; openEnded:true; "
+        material="color:#333; side:double"
+        rotation="-25 0 0"
+        position="0 -3 0"
+        scale="0 0 0"
+        animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 1 1 1; 
+            dur: 1500; 
+            easing: easeOutExpo; 
+            autoplay: false"                 
+    ></a-entity> 
+      
+    </a-entity>  
   
   
-  <a-timeline-animation select="#skills-center-holder" name="hide" offset="4000"></a-timeline-animation>
-  <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
-      </a-timeline>
+    <!-- skills-demo -->
   
-      <a-entity id="contactcenterskillsdemohide" animation-timeline="timeline: #skillsDemoTimelineHide; startEvents: contactcenter-skills-demo-hide"></a-entity>
-      <a-timeline id="skillsDemoTimelineHide">
-          <a-timeline-group>
-              <a-timeline-animation select="#skills-center-holder" name="hide"></a-timeline-animation>
-          </a-timeline-group>
-      </a-timeline>
+    <a-entity id="contactcenterskillsdemo" animation-timeline="timeline: #skillsDemoTimeline; startEvents: contactcenter-skills-demo-play"></a-entity>
   
-      <a-entity id="skills-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
+    <a-timeline id="skillsDemoTimeline">
+  <!-- setup skills -->
+      <a-timeline-group>
+        <a-timeline-animation select="#product_ccenter" name="shiftout" offset="0"></a-timeline-animation>
   
-        <a-entity id="skills-center-holder"
-          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
-          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+        <a-timeline-animation select="#skills-center-holder" name="show"></a-timeline-animation>
+        <a-timeline-animation select="#center-aibot" name="turn" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-aibot" name="moveoff" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-aibot" name="moveout" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#aibot" name="popout" offset="0"></a-timeline-animation>
+      </a-timeline-group>
+  
+  <!-- pop out country -->
+      <a-timeline-group>
+        <a-timeline-animation select="#language-gate" name="popup" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#language-english" name="show" offset="500"></a-timeline-animation>            
+        <a-timeline-animation select="#language-english" name="popup" offset="500"></a-timeline-animation>            
+        <a-timeline-animation select="#center-singlerep1" name="popup" offset="1500"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="shoot" offset="1500"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep2" name="popup" offset="1800"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep2" name="shoot" offset="1800"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="popup" offset="2100"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="shoot" offset="2100"></a-timeline-animation>
+      </a-timeline-group>
+  
+  <!-- guide to rep while reps switch colors -->
+      <a-timeline-group>
+        <a-timeline-animation select="#clientfunnel" name="popup" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="appear" offset="400"></a-timeline-animation>
+        <a-timeline-animation select="#client" name="connect1" offset="500"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="red" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="red" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="green" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="2000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#language-gate" name="flipin" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-french" name="show" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-french" name="popup" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-english" name="popout" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-english" name="hide" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-spanish" name="show" offset="2500"></a-timeline-animation>
+  
+      </a-timeline-group>
+  
+      <a-timeline-group>
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="red" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="connect2" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="2000"></a-timeline-animation>
+      </a-timeline-group>
+  
+      <a-timeline-group>
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="green" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="connect3a" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="2000"></a-timeline-animation>
+      </a-timeline-group>
+  
+      <a-timeline-group>
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="appear" offset="400"></a-timeline-animation>
+        <a-timeline-animation select="#client" name="connect1" offset="500"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="red" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="red" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="green" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="2000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#language-gate" name="flipout" offset="2500"></a-timeline-animation>
+        <a-timeline-animation select="#language-spanish" name="popup" offset="2500"></a-timeline-animation>
+      </a-timeline-group>
+  
+      <a-timeline-group>
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="red" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="connect2" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="yellow" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="2000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="yellow" offset="2000"></a-timeline-animation>
+      </a-timeline-group>
+  
+      <a-timeline-group>
+        <a-timeline-animation select="#center-singlerep2" name="green" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep3" name="green" offset="0"></a-timeline-animation>
+  
+        <a-timeline-animation select="#client" name="connect3b" offset="1000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep1" name="yellow" offset="2000"></a-timeline-animation>
+  
+        <a-timeline-animation select="#center-singlerep2" name="red" offset="3000"></a-timeline-animation>
+        <a-timeline-animation select="#center-singlerep1" name="red" offset="3000"></a-timeline-animation>
+  
+      </a-timeline-group>
+  
+  <!-- cleanup skills -->
+      <a-timeline-group>
+        <a-timeline-animation select="#client" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#client" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#skills-center-holder" name="hide" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
+      </a-timeline-group>
+    </a-timeline>
+  
+    <a-entity id="contactcenterskillsdemohide" animation-timeline="timeline: #skillsDemoTimelineHide; startEvents: contactcenter-skills-demo-hide"></a-entity>
+    <a-timeline id="skillsDemoTimelineHide">
+        <a-timeline-group>
+            <a-timeline-animation select="#skills-center-holder" name="hide"></a-timeline-animation>
+        </a-timeline-group>
+    </a-timeline>
+  
+    <a-entity id="skills-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
+  
+      <a-entity id="skills-center-holder"
+        animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+        animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+        >
+  
+        <a-entity id="center-singlerep1"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 -25 0"
+          position="2 1.4 -4"
+          scale="0 0 0"
+          animation__green="
+            property: material.color; 
+            to: #5ABE1C; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__red="
+            property: material.color; 
+            to: #F04722; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__yellow="
+            property: material.color; 
+            to: #FCC137; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 0.6 0.6 0.6; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__shoot="
+            property: position; 
+            from: 2.265 0.25 -2.6; 
+            to: 2.6 1.4 -3; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          animation__unpop="
+            property: scale; 
+            from: 0.6 0.6 0.6; 
+            to: 0 0 0; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
           >
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#agent-png;"
+            position="0 0 0.15"
+          >            
+          </a-entity>          
+        </a-entity>
   
-          <a-entity id="center-singlerep1"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 -25 0"
-            position="2.265 0.25 -2.6"
-            scale="0 0 0"
-            animation__green="
-              property: material.color; 
-              from: #F08445; 
-              to: #00FF00; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__red="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__yellow="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__popup="
-              property: scale; 
-              from: 0 0 0; 
-              to: 0.6 0.6 0.6; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__shoot="
-              property: position; 
-              from: 2.265 0.25 -2.6; 
-              to: 2.6 1.4 -3; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false" 
-            animation__unpop="
-              property: scale; 
-              from: 0.6 0.6 0.6; 
-              to: 0 0 0; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="singlerep"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#agent-png;"
-              position="0 0 0.15"
-            >            
-            </a-entity>          
-          </a-entity>
+        <a-entity id="center-singlerep2"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 -25 0"
+          position="2.8 1.4 -3.8"
+          scale="0 0 0"
+          animation__green="
+            property: material.color; 
+            to: #5ABE1C; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__red="
+            property: material.color; 
+            to: #F04722; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__yellow="
+            property: material.color; 
+            to: #FCC137; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 0.6 0.6 0.6; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__shoot="
+            property: position; 
+            from: 2.265 0.25 -2.6; 
+            to: 2 1.4 -3.7; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          animation__unpop="
+            property: scale; 
+            from: 0.6 0.6 0.6; 
+            to: 0 0 0; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          >
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#agent-png;"
+            position="0 0 0.15"
+          >            
+          </a-entity>          
+        </a-entity>
   
-          <a-entity id="center-singlerep2"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 -25 0"
-            position="-0.75 1.5 -1.5"
-            scale="0 0 0"
-            animation__green="
-              property: material.color; 
-              from: #F08445; 
-              to: #00FF00; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__red="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__yellow="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__popup="
-              property: scale; 
-              from: 0 0 0; 
-              to: 0.6 0.6 0.6; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__shoot="
-              property: position; 
-              from: 2.265 0.25 -2.6; 
-              to: 2 1.4 -3.7; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false" 
-            animation__unpop="
-              property: scale; 
-              from: 0.6 0.6 0.6; 
-              to: 0 0 0; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="singlerep"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#agent-png;"
-              position="0 0 0.15"
-            >            
-            </a-entity>          
-          </a-entity>
+        <a-entity id="center-singlerep3"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 -25 0"
+          position="3.5 1.4 -3.4"
+          scale="0 0 0"
+          animation__green="
+            property: material.color; 
+            to: #5ABE1C; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__red="
+            property: material.color; 
+            to: #F04722; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__yellow="
+            property: material.color; 
+            to: #FCC137; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 0.6 0.6 0.6; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"  
+          animation__shoot="
+            property: position; 
+            from: 2.265 0.25 -2.6; 
+            to: 3.5 1.4 -2.7; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          animation__unpop="
+            property: scale; 
+            from: 0.6 0.6 0.6; 
+            to: 0 0 0; 
+            dur: 1; 
+            easing: easeOutExpo; 
+            autoplay: false"   
+          >
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#agent-png;"
+            position="0 0 0.15"
+          >            
+          </a-entity>          
+        </a-entity>
   
-          <a-entity id="center-singlerep3"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 -25 0"
-            position="-0.75 1.5 -1.5"
-            scale="0 0 0"
-            animation__green="
-              property: material.color; 
-              from: #F08445; 
-              to: #00FF00; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__red="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__yellow="
-              property: material.color; 
-              from: #F08445; 
-              to: #FF0000; 
-              dur: 500; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__popup="
-              property: scale; 
-              from: 0 0 0; 
-              to: 0.6 0.6 0.6; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"  
-            animation__shoot="
-              property: position; 
-              from: 2.265 0.25 -2.6; 
-              to: 3.5 1.4 -2.7; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false" 
-            animation__unpop="
-              property: scale; 
-              from: 0.6 0.6 0.6; 
-              to: 0 0 0; 
-              dur: 1000; 
-              easing: easeOutExpo; 
-              autoplay: false"   
-            >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="singlerep"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#agent-png;"
-              position="0 0 0.15"
-            >            
-            </a-entity>          
-          </a-entity>
-  
-          <a-entity id="language-gate"
+        <a-entity id="language-gate"
+          geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+          material="color:#F08445; side:double"
+          position="2.25 0.25 -2.55"
+          rotation="0 -30 0"
+          scale="0 0 0"
+          animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 1 1 1; 
+            dur: 1000; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          animation__flipin="
+            property: rotation; 
+            from: 0 -30 0; 
+            to: 0 150 0; 
+            dur: 1000; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          animation__flipout="
+            property: rotation; 
+            from: 0 -30 0; 
+            to: 0 330 0; 
+            dur: 1000; 
+            easing: easeOutExpo; 
+            autoplay: false" 
+          >
+          <a-entity id="language-english"
             geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
-            material="color:#F08445;"
-            position="2.25 0.25 -2.55"
-            rotation="0 -30 0"
+            material="color:#fff; src:#languageus"
+            position="0 0 0.05"
+            rotation="0 0 0"
             scale="0 0 0"
+            visible="false"
             animation__popup="
               property: scale; 
               from: 0 0 0; 
@@ -1814,468 +1981,497 @@
               dur: 1000; 
               easing: easeOutExpo; 
               autoplay: false"  
-  
+            animation__popout="
+              property: scale; 
+              from: 1 1 1; 
+              to: 0 0 0; 
+              dur: 100; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+            animation__hide="property: visible; from: true; to: true; dur: 1; autoplay: false"
             >
-            <a-entity id="language-english"
-              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
-              material="color:#fff; src:#languageus"
-              position="0 0 0.05"
-              rotation="0 0 0"
-              scale="0 0 0"
-              animation__popup="
-                property: scale; 
-                from: 0 0 0; 
-                to: 1 1 1; 
-                dur: 1000; 
-                easing: easeOutExpo; 
-                autoplay: false"  
+          </a-entity>          
   
-              >
-            </a-entity>          
-  
-            <a-entity id="language-french"
-              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
-              material="color:#fff; src:#languagefrench"
-              position="0 0 -0.05"
-              rotation="0 180 0"
-              >
-            </a-entity>          
-  
-            <a-entity id="language-spanish"
-              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
-              material="color:#fff; src:#languagespanish"
-              position="0 0 0.05"
-              rotation="0 0 0"
-              visible="false"
-              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
-              animation__hide="property: visible; from: true; to: true; dur: 1; autoplay: false"            
-              >
-            </a-entity>          
-  
-          </a-entity>
-  
-          <a-entity id="center-aibot"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 62.5 0"
-            position="0.940 -1 -2.855"
-            animation__moveoff="
-                property: position; 
-                from: 0.940 -1 -2.855; 
-                to: 1 -1 -1.5; 
-                dur: 200; 
-                easing: easeInExpo; 
-                autoplay: false"       
-            animation__moveout="
-                property: position; 
-                from: 1 -1 -1.5; 
-                to: 0 0 -1; 
-                dur: 1500; 
-                easing: easeOutExpo; 
-                autoplay: false"       
-            animation__turn="
-                property: rotation; 
-                from: 0 62.5 0; 
-                to: 0 0 0; 
-                dur: 2000; 
-                easing: easeOutExpo; 
-                autoplay: false"    
-            animation__shiftover="
-                property: position; 
-                from: 1 -1 -1.5 ; 
-                to: 0.75 0.75 -1.25; 
-                dur: 1500; 
-                easing: easeOutExpo; 
-                autoplay: false"       
+          <a-entity id="language-french"
+            geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+            material="color:#fff; src:#languagefrench"
+            position="0 0 -0.05"
+            rotation="0 180 0"
+            scale="0 0 0"
+            visible="false"
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 1 1 1; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"
+            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+            animation__hide="property: visible; from: true; to: true; dur: 1; autoplay: false"
             >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="aibot"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#aibot-png;"
-              position="0 0 0"  
-              animation__popout="
-                  property: position; 
-                  from: 0 0 0; 
-                  to: 0 0 0.15; 
-                  dur: 1000; 
-                  easing: easeOutExpo; 
-                  autoplay: false"                   
-            >            
-            </a-entity>
-          </a-entity>
+          </a-entity>          
   
-  
-          <a-entity id="clients">
-            
-          </a-entity>
+          <a-entity id="language-spanish"
+            geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+            material="color:#fff; src:#languagespanish"
+            position="0 0 0.05"
+            rotation="0 0 0"
+            scale="0 0 0"
+            visible="false"
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 1 1 1; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"
+            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+            animation__hide="property: visible; from: true; to: true; dur: 1; autoplay: false"
+            >
+          </a-entity>          
   
         </a-entity>
+  
+        <a-entity id="center-aibot"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 62.5 0"
+          position="0.940 -1 -2.855"
+          animation__moveoff="
+              property: position; 
+              from: 0.940 -1 -2.855; 
+              to: 1 -1 -1.5; 
+              dur: 200; 
+              easing: easeInExpo; 
+              autoplay: false"       
+          animation__moveout="
+              property: position; 
+              from: 1 -1 -1.5; 
+              to: 0 0 -1; 
+              dur: 1500; 
+              easing: easeOutExpo; 
+              autoplay: false"       
+          animation__turn="
+              property: rotation; 
+              from: 0 62.5 0; 
+              to: 0 0 0; 
+              dur: 2000; 
+              easing: easeOutExpo; 
+              autoplay: false"    
+          animation__shiftover="
+              property: position; 
+              from: 1 -1 -1.5 ; 
+              to: 0.75 0.75 -1.25; 
+              dur: 1500; 
+              easing: easeOutExpo; 
+              autoplay: false"       
+          >
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity id="aibot"
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#aibot-png;"
+            position="0 0 0"  
+            animation__popout="
+                property: position; 
+                from: 0 0 0; 
+                to: 0 0 0.15; 
+                dur: 1000; 
+                easing: easeOutExpo; 
+                autoplay: false"                   
+          >            
+          </a-entity>
+        </a-entity>
+  
+  
+        <a-entity id="theclient">
+          <a-sphere id="client"
+            radius="0.1"
+            position="0 -1.4 0"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji1"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0 -1.4 0; to: 0 -0.25 -1.2; dur: 2000; easing: linear; autoplay: false"                 
+            animation__connect2=" property: position; from: 0 -0.25 -1.2; to: 2.24 0.2 -2.6; dur: 2000; easing: linear; autoplay: false"                 
+            animation__connect3a=" property: position; from: 2.24 0.2 -2.6; to: 2 1.35 -3.75; dur: 2000; easing: linear; autoplay: false"                 
+            animation__connect3b=" property: position; from: 2.24 0.2 -2.6; to: 3.7 1.35 -2.9; dur: 2000; easing: linear; autoplay: false"                 
+            animation__repos="property: position; to:0 -1.4 0; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+                
+        </a-entity>
+  
       </a-entity>
-      <!-- END skills-demo -->
+    </a-entity>
+    <!-- END skills-demo -->
   
   
   
       <!-- issues-demo -->
       <a-entity id="contactcenterissuesdemo" animation-timeline="timeline: #issuesDemoTimeline; startEvents: contactcenter-issues-demo-play"></a-entity>
+  
       <a-timeline id="issuesDemoTimeline">
-  <a-timeline-animation select="#product_ccenter" name="shiftout"></a-timeline-animation>
+  <!-- setup issues and reset -->
+      <a-timeline-group>
+        <a-timeline-animation select="#product_ccenter" name="shiftout"></a-timeline-animation>
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
-          </a-timeline-group>        
+        <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-              <a-timeline-animation select="#issues-center-holder" name="show"></a-timeline-animation>
-              <a-timeline-animation select="#center-rep" name="turn" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#center-rep" name="moveoff" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#center-rep" name="moveout" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#rep" name="popout" offset="0"></a-timeline-animation>
-          </a-timeline-group>
+  <!-- start center -->
+      <a-timeline-group>
+        <a-timeline-animation select="#issues-center-holder" name="show"></a-timeline-animation>
+        <a-timeline-animation select="#center-rep" name="turn" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-rep" name="moveoff" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-rep" name="moveout" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#rep" name="popout" offset="0"></a-timeline-animation>
+      </a-timeline-group>
   
-          <a-timeline-group>
-              <a-timeline-animation select="#clientfunnel" name="popup" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
-              <a-timeline-animation select="#c1" name="connect1" offset="500"></a-timeline-animation>
-              <a-timeline-animation select="#c5" name="appear" offset="0"></a-timeline-animation>
-              <a-timeline-animation select="#c5" name="connect1" offset="0"></a-timeline-animation>
-          </a-timeline-group>
+  <!-- show funnel and clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#clientfunnel" name="popup" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="connect1" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="connect1" offset="0"></a-timeline-animation>
+      </a-timeline-group>
   
-          <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+  <!-- reset clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="appear" offset="1000"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="connect1" offset="1000"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="appear" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="connect1" offset="1000"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+  <!-- reset clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="connect1" offset="0"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="connect1" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>    
+  <!-- reset clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>    
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c1" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c1" name="connect1" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="appear" offset="1000"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="connect1" offset="1000"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="connect1" offset="500"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c1" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="connect1" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="appear" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="connect1" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connect1" offset="500"></a-timeline-animation>
+      </a-timeline-group>        
   
+  <!-- shift manager out -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>          
+        <a-timeline-animation select="#center-rep" name="shiftover" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#center-manager" name="popup" offset="0"></a-timeline-animation>
+      </a-timeline-group>
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>          
-            <a-timeline-animation select="#center-rep" name="shiftover" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#center-manager" name="popup" offset="0"></a-timeline-animation>
-          </a-timeline-group>
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="appear" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="connect2" offset="1000"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="connect2" offset="500"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="appear" offset="1000"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="connect2" offset="1000"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c5" name="connect2" offset="500"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- reset clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="connect2" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="connect2" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c3" name="connect2" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c4" name="connect2" offset="0"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- reset clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  <!-- show clients -->
+      <a-timeline-group>
+        <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="connect2" offset="500"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-group>
-            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
-            <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
-            <a-timeline-animation select="#c1" name="connect2" offset="500"></a-timeline-animation>
-          </a-timeline-group>        
+  <!-- reset clients -->
+      <a-timeline-group>             
+        <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
+    
+  <!-- show clients -->
+      <a-timeline-group>             
+        <a-timeline-animation select="#c6" name="connect2" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#c6" name="repos" offset="2000"></a-timeline-animation>
+      </a-timeline-group>        
   
-          <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
-        
-          <a-timeline-animation select="#c6" name="connect2" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
-          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  <!-- cleanup retail -->
+      <a-timeline-group>             
+        <a-timeline-animation select="#issues-center-holder" name="hide" offset="0"></a-timeline-animation>
+        <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
+      </a-timeline-group>        
+    
+    </a-timeline>
   
+    <a-entity id="contactcenterissuesdemohide" animation-timeline="timeline: #issuesDemoTimelineHide; startEvents: contactcenter-issues-demo-hide"></a-entity>
+    <a-timeline id="issuesDemoTimelineHide">
+        <a-timeline-group>
+            <a-timeline-animation select="#issues-center-holder" name="hide"></a-timeline-animation>
+        </a-timeline-group>
+    </a-timeline>
   
-  <a-timeline-animation select="#issues-center-holder" name="hide" offset="4000"></a-timeline-animation>
-  <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
-      </a-timeline>
-  
-      <a-entity id="contactcenterissuesdemohide" animation-timeline="timeline: #issuesDemoTimelineHide; startEvents: contactcenter-issues-demo-hide"></a-entity>
-      <a-timeline id="issuesDemoTimelineHide">
-          <a-timeline-group>
-              <a-timeline-animation select="#issues-center-holder" name="hide"></a-timeline-animation>
-          </a-timeline-group>
-      </a-timeline>
-  
-      <a-entity id="issues-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
-  
-        <a-entity id="issues-center-holder"
-          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
-          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+    <a-entity id="issues-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
+      <a-entity id="issues-center-holder"
+        animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+        animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+        >
+        <a-entity id="center-manager"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 0 0"
+          position="-0.75 1.5 -1.5"
+          scale="0 0 0"
+          animation__popup="
+            property: scale; 
+            from: 0 0 0; 
+            to: 1 1 1; 
+            dur: 1000; 
+            easing: easeOutExpo; 
+            autoplay: false"  
           >
-  
-          <a-entity id="center-manager"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 0 0"
-            position="-0.75 1.5 -1.5"
-            scale="0 0 0"
-            animation__popup="
-              property: scale; 
-              from: 0 0 0; 
-              to: 1 1 1; 
-              dur: 1000; 
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity id="manager"
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#manager-png;"
+            position="0 0 0.15"
+          >            
+          </a-entity>          
+        </a-entity>
+        <a-entity id="center-rep"
+          geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+          material="color:#F08445;"
+          rotation="0 62.5 0"
+          position="0.940 -1 -2.855"
+          animation__moveoff="
+              property: position; 
+              from: 0.940 -1 -2.855; 
+              to: 1 -1 -1.5; 
+              dur: 200; 
+              easing: easeInExpo; 
+              autoplay: false"       
+          animation__moveout="
+              property: position; 
+              from: 1 -1 -1.5; 
+              to: 0 0 -1; 
+              dur: 1500; 
               easing: easeOutExpo; 
-              autoplay: false"  
-            >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="manager"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#manager-png;"
-              position="0 0 0.15"
-            >            
-            </a-entity>          
-          </a-entity>
-  
-          <a-entity id="center-rep"
-            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
-            material="color:#F08445;"
-            rotation="0 62.5 0"
-            position="0.940 -1 -2.855"
-            animation__moveoff="
+              autoplay: false"       
+          animation__turn="
+              property: rotation; 
+              from: 0 62.5 0; 
+              to: 0 0 0; 
+              dur: 2000; 
+              easing: easeOutExpo; 
+              autoplay: false"    
+          animation__shiftover="
+              property: position; 
+              from: 0 0 -1; 
+              to: 0.75 0.75 -1.25; 
+              dur: 1500; 
+              easing: easeOutExpo; 
+              autoplay: false"       
+          >
+          <a-entity
+            geometry="primitive:cylinder; radius:0.380; height:0.075;"
+            material="color:#fff;"
+            rotation="90 0 0"
+          ></a-entity>      
+          <a-entity id="rep"
+            geometry="primitive:plane; width:1.22; height:1.22;"
+            material="color:#fff; transparent:true; src:#agents-png;"
+            position="0 0 0"  
+            animation__popout="
                 property: position; 
-                from: 0.940 -1 -2.855; 
-                to: 1 -1 -1.5; 
-                dur: 200; 
-                easing: easeInExpo; 
-                autoplay: false"       
-            animation__moveout="
-                property: position; 
-                from: 1 -1 -1.5; 
-                to: 0 0 -1; 
-                dur: 1500; 
-                easing: easeOutExpo; 
-                autoplay: false"       
-            animation__turn="
-                property: rotation; 
-                from: 0 62.5 0; 
-                to: 0 0 0; 
-                dur: 2000; 
-                easing: easeOutExpo; 
-                autoplay: false"    
-            animation__shiftover="
-                property: position; 
-                from: 0 0 -1; 
-                to: 0.75 0.75 -1.25; 
-                dur: 1500; 
-                easing: easeOutExpo; 
-                autoplay: false"       
-            >
-            <a-entity
-              geometry="primitive:cylinder; radius:0.380; height:0.075;"
-              material="color:#fff;"
-              rotation="90 0 0"
-            ></a-entity>      
-            <a-entity id="rep"
-              geometry="primitive:plane; width:1.22; height:1.22;"
-              material="color:#fff; transparent:true; src:#agents-png;"
-              position="0 0 0"  
-              animation__popout="
-                  property: position; 
-                  from: 0 0 0; 
-                  to: 0 0 0.15; 
-                  dur: 1000; 
-                  easing: easeOutExpo; 
-                  autoplay: false"                   
-            >            
-            </a-entity>
-          </a-entity>
-  
-          <a-entity id="clientfunnel"
-            geometry="primitive:cylinder; radius:0.5; height:2; openEnded:true; "
-            material="color:#333; side:double"
-            rotation="0 0 0"
-            position="0 -3 0"
-            scale="0 0 0"
-            animation__popup="
-                property: scale; 
                 from: 0 0 0; 
-                to: 1 1 1; 
-                dur: 1500; 
+                to: 0 0 0.15; 
+                dur: 1000; 
                 easing: easeOutExpo; 
-                autoplay: false"                 
-          ></a-entity> 
-  
-          <a-entity id="clients"
+                autoplay: false"                   
+          >            
+          </a-entity>
+        </a-entity>
+        <a-entity id="clients"
           position="0 -1 0"
           >
-            <a-sphere id="c1"
-              radius="0.1"
-              position="0.2 -1.2 0"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji1"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-  
-            <a-sphere id="c2"
-              radius="0.1"
-              position=" 0.1 -1 0"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji2"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: 0.1 -1 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-              animation__repos="property: position; to: 0.1 -1 0; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-  
-            <a-sphere id="c3"
-              radius="0.1"
-              position=" -0.1 -1 0.1"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji3"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: -0.1 -1 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-              animation__repos="property: position; to: -0.1 -1 0.1; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-   
-            <a-sphere id="c4"
-              radius="0.1"
-              position="0 -1 -0.2"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji4"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: 0 -1 -0.2; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-   
-            <a-sphere id="c5"
-              radius="0.1"
-              position="0 -1.2 0.1"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji5"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: 0 -1.2 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-              animation__repos="property: position; to:0 -1.2 0.1; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-   
-  
-            <a-sphere id="c6"
-              radius="0.1"
-              position="0.2 -1.2 0"
-              scale="0 0 0"
-              color="#fff"
-              src="#emoji6"
-              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
-              animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
-              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
-  
-              animation__connectshift=" property: position; from: 0.4 2 -1.4; to: -0.7 2.5 -1.6; dur: 1000; easing: linear; autoplay: false"   
-              animation__connectshift2=" property: position; from: 0.2 -1.2 0; to: -0.7 2.5 -1.6; dur: 4500; easing: linear; autoplay: false"                 
-  
-              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
-              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
-            ></a-sphere>  
-  
-  
-          </a-entity>
-  
+          <a-sphere id="c1"
+            radius="0.1"
+            position="0.2 -1.2 0"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji1"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+          <a-sphere id="c2"
+            radius="0.1"
+            position=" 0.1 -1 0"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji2"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0.1 -1 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__repos="property: position; to: 0.1 -1 0; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+          <a-sphere id="c3"
+            radius="0.1"
+            position=" -0.1 -1 0.1"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji3"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: -0.1 -1 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__repos="property: position; to: -0.1 -1 0.1; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+          <a-sphere id="c4"
+            radius="0.1"
+            position="0 -1 -0.2"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji4"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0 -1 -0.2; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+          <a-sphere id="c5"
+            radius="0.1"
+            position="0 -1.2 0.1"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji5"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0 -1.2 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__repos="property: position; to:0 -1.2 0.1; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+          ></a-sphere>  
+          <a-sphere id="c6"
+            radius="0.1"
+            position="0.2 -1.2 0"
+            scale="0 0 0"
+            color="#fff"
+            src="#emoji6"
+            animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+            animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+            animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+            animation__connectshift=" property: position; from: 0.4 2 -1.4; to: -0.7 2.5 -1.6; dur: 1000; easing: linear; autoplay: false"   
+            animation__connectshift2=" property: position; from: 0.2 -1.2 0; to: -0.7 2.5 -1.6; dur: 4500; easing: linear; autoplay: false"
+            animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+            animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false" 
+          ></a-sphere>  
         </a-entity>
-  
       </a-entity>
-      <!-- END issues-demo -->
+    </a-entity>
+    <!-- END issues-demo -->
   
   
-      <!-- LABEL -->
-      <a-entity lookatlabel mixin="modellabel" material="src: #contactcenterlabel"
-      ></a-entity>
-      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
-      <!-- end LABEL -->
+    <!-- LABEL -->
+    <a-entity lookatlabel mixin="modellabel" material="src: #contactcenterlabel"
+    ></a-entity>
+    <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+    <!-- end LABEL -->
   </a-entity>        
-  <!-- END CONTACT CENTER --><!-- CRM -->
+  <!-- END CONTACT CENTER<!-- CRM -->
   <a-entity id="crm"
     position="-8 0 2.25"
   >
@@ -2284,7 +2480,10 @@
       scale="1 1 1"
       position="0 -0.5 0"
       rotation="0 20 0"
+      gar-calculator-element="modelID:7D3D-5335EA;experience_id:FEEC-CA178D;"
     ></a-entity>
+  
+   
   
     <!-- logos -->
     <a-entity position="0 0 0">
@@ -2353,6 +2552,7 @@
           scale="1.3 1.6 1.3"
           position="0 0 0"
           rotation="0 0 0"
+          gar-calculator-element="modelID:86C7-4F3896;experience_id:FEEC-CA178D;"
       ></a-entity>
   
       <!-- animation block -->
@@ -2370,8 +2570,8 @@
           </a-timeline-group>          
   <!-- close -->
           <a-timeline-group>
-              <a-timeline-animation select="#smartwan-demo" name="zoomout" offset="4000"></a-timeline-animation>
-              <a-timeline-animation select="#smartwan-lid" name="closelid" offset="4500"></a-timeline-animation>
+              <a-timeline-animation select="#smartwan-demo" name="zoomout" offset="8000"></a-timeline-animation>
+              <a-timeline-animation select="#smartwan-lid" name="closelid" offset="8500"></a-timeline-animation>
           </a-timeline-group>          
   <!-- cleanup -->
           <a-timeline-group>
@@ -2405,7 +2605,7 @@
           >        
           <a-entity id="smartwan-inside"
               geometry="primitive:plane; height: 0.5; width: 1.4;" 
-              material="color:#fff; src:#smartwan-box-int;"
+              material="shader:gif; src:#smartwan-box-int;"
               position="0 0 0.11"
           ></a-entity>
   
@@ -2428,7 +2628,7 @@
               >   
               <a-entity id="lidinside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="color:#fff; src:#smartwan-lid-int;"
+                  material="shader:gif; src:#smartwan-lid-int;"
                   position="0 0.250 0"
                   rotation="180 0 0"
               ></a-entity>
@@ -2453,7 +2653,12 @@
       <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
       <!-- end LABEL -->
   </a-entity><!-- BEGIN SIP TRUNKING -->
-  <a-entity id="sip-trunking" scale=".25 .25 .25" position="8 0.5 2.25" rotation="0 -100 0">
+  <a-entity id="sip-trunking" 
+      scale=".25 .25 .25" 
+      position="8 0.5 2.25" 
+      rotation="0 -100 0"
+      gar-calculator-element="modelID:39EA-8A408A;experience_id:FEEC-CA178D;"
+      >
       <a-entity position="-5 0 0">
           <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
           </a-entity>
@@ -2660,6 +2865,7 @@
   	        scale="0.375 0.375 0.375"
   	        position="0 -0.3 0"
   	        rotation="0 0 0"
+  			gar-calculator-element="modelID:4541-383982;experience_id:FEEC-CA178D;"
   	    ></a-entity> 
   	    <a-entity 
   	        obj-model="obj: #reachslice-obj; mtl: #reachslice-mtl"
@@ -3396,11 +3602,13 @@
     scale="1 1 1"
     position="0 0 0"
     rotation="0 0 0"
+    gar-calculator-element="modelID:20A0-9341C6;experience_id:FEEC-CA178D;"  
   ></a-entity>
-  <!-- end ucaas--><a-entity trunk
+  <!-- end ucaas--><a-entity trunk="clickAction:opentrunk"
   		  class="clickable"  
    		  position="0 0.48 4.25" 
    		  rotation="0 180 0"
+  		  gar-calculator-element="modelID:A7BC-E24248;experience_id:FEEC-CA178D;"
    		  >
   </a-entity>
   <!-- Checkpoint Initial Posisiton -->
@@ -3475,7 +3683,9 @@
       >    
       </a-video>
       <a-entity panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarkucaas;
           toggle:true
         "
@@ -3510,7 +3720,9 @@
       >    
       </a-video>
       <a-entity panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarksip;
           toggle:true
         "
@@ -3543,7 +3755,9 @@
       >    
       </a-video>
       <a-entity panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarkcrm;
           toggle:true
         "
@@ -3583,7 +3797,9 @@
       >      
       </a-entity>
       <a-entity panelbtn="
-          label:#panel-chime-btn-label-2; 
+          base:#panel-chime-btn-label-2; 
+          hover:#panel-chime-btn-label-2-hover; 
+          click:#panel-chime-btn-label-2-click; 
           clickAction:demochime2;
         "
         position="0 1.425 -1.25"
@@ -3591,14 +3807,18 @@
       </a-entity>
   
       <a-entity  panelbtn="
-          label:#panel-chime-btn-label-1; 
+          base:#panel-chime-btn-label-1; 
+          hover:#panel-chime-btn-label-1-hover; 
+          click:#panel-chime-btn-label-1-click; 
           clickAction:demochime1;
         "
         position="0 1.275 -1.25"
       >      
       </a-entity>    
       <a-entity  panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarkchime;
           toggle:true
         "
@@ -3638,7 +3858,9 @@
       >      
       </a-entity>
       <a-entity panelbtn="
-          label:#panel-contactcenter-btn-label-1; 
+          base:#panel-contactcenter-btn-label-1; 
+          hover:#panel-contactcenter-btn-label-1-hover; 
+          click:#panel-contactcenter-btn-label-1-click; 
           clickAction:democontactcenter1;
         "
         position="0 1.425 -1.25"
@@ -3646,14 +3868,18 @@
       </a-entity>
   
       <a-entity  panelbtn="
-          label:#panel-contactcenter-btn-label-2; 
+          base:#panel-contactcenter-btn-label-2; 
+          hover:#panel-contactcenter-btn-label-2-hover; 
+          click:#panel-contactcenter-btn-label-2-click; 
           clickAction:democontactcenter2;
         "
         position="0 1.275 -1.25"
       >      
       </a-entity>    
       <a-entity  panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarkcontactcenter;
           toggle:true
         "
@@ -3693,7 +3919,9 @@
       >      
       </a-entity>
       <a-entity panelbtn="
-          label:#panel-smartwan-btn-label; 
+          base:#panel-smartwan-btn-label; 
+          hover:#panel-smartwan-btn-label-hover; 
+          click:#panel-smartwan-btn-label-click; 
           clickAction:demosmartwan;
         "
         position="0 1.425 -1.25"
@@ -3701,7 +3929,9 @@
       </a-entity>
   
       <a-entity  panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarksmartwan;
           toggle:true
         "
@@ -3741,7 +3971,9 @@
       >      
       </a-entity>
       <a-entity panelbtn="
-          label:#panel-vonagereach-btn-label-1; 
+          base:#panel-vonagereach-btn-label-1; 
+          hover:#panel-vonagereach-btn-label-1-hover; 
+          click:#panel-vonagereach-btn-label-1-click; 
           clickAction:demovonagereach1;
         "
         position="0 1.425 -1.25"
@@ -3749,14 +3981,18 @@
       </a-entity>
   
       <a-entity  panelbtn="
-          label:#panel-vonagereach-btn-label-2; 
+          base:#panel-vonagereach-btn-label-2; 
+          hover:#panel-vonagereach-btn-label-2-hover; 
+          click:#panel-vonagereach-btn-label-2-click; 
           clickAction:demovonagereach2;
         "
         position="0 1.275 -1.25"
       >      
       </a-entity>    
       <a-entity  panelbtn="
-          label:#bookmark-btn-label; 
+          base:#bookmark-btn-label; 
+          hover:#bookmark-btn-label-hover; 
+          click:#bookmark-btn-label-click; 
           clickAction:bookmarkvonagereach;
           toggle:true
         "
@@ -3780,7 +4016,7 @@
   			cameraRig: #cameraRig; 
   			teleportOrigin: #head;
   			button: trigger;
-  			curveShootingSpeed:5;
+  			curveShootingSpeed:6;
   			hitCylinderRadius:0.35;
   			hitCylinderColor:#ffe2b3;
   			curveHitColor:#ffe2b3;
@@ -3789,17 +4025,17 @@
   			"
   		gearvr-controls="
   			armModel: true;
-  			buttonColor: red;
-  			buttonTouchedColor: yellow;
-  			buttonHighlightColor: green;
+  			buttonColor: #FCC137;
+  			buttonTouchedColor: #FCC137;
+  			buttonHighlightColor: #DF5A0F;
   			hand: right;
   			model: true;
   			rotationOffset: 0			
   			" 
   		laser-controls
   
-  		raycaster="showLine: true; far: 100" 
-  		line="color: orange; opacity: 0.75"
+  		raycaster="showLine: true; far: 10" 
+  		line="color: #FCC137; opacity: 0.75"
   	></a-entity>
   
   </a-entity></a-scene>
