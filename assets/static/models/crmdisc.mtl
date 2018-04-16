@@ -1,0 +1,13 @@
+# Blender MTL File: 'crmdisc.blend'
+# Material Count: 1
+
+newmtl lambert8SG
+Ns 96.078431
+Ka 0.130000 0.130000 0.130000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 1.000000 1.000000 1.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd crmdisc.png

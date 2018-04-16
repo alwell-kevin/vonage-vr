@@ -1,0 +1,3807 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vonage VR CPE - GearVR</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="webxr-boilerplate,webvr,webxr,boilerplate-application,starter-kit,aframe,aframevr,aframexr,aframe-vr,aframe-boilerplate,webpack,webpack-boilerplate,sass,pwa,service-workers">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/static/images/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/static/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#24caff">
+    <meta name="msapplication-config" content="assets/static/browserconfig.xml">
+    <meta name="theme-color" content="#ee295f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="manifest" href="assets/static/site.webmanifest">
+    <link rel="mask-icon" href="assets/static/safari-pinned-tab.svg" color="#ee295f">
+
+    <!-- A-Frame -->
+    <script src="js/aframe-base.js"></script>
+    <script src="js/aframe-app.js"></script>
+
+    <!-- common -->
+    <link rel="stylesheet" type="text/css" href="style/app-theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="js/vendors.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body><div id="background-landing" class="container">
+
+    <div class="row center">
+        <div class="col s10 offset-s1  m6 offset-m3">
+            <img src="/assets/static/images/Vonage_logo.png" /> 
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s10 offset-s1  m6 offset-m3">
+            <label>Enter Tradeshow Visitor</label>
+            <input id="name" type="text">
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s10 offset-s1  m6 offset-m3">
+            <!-- class="btn-large waves-effect waves-light disabled" -->
+            <a id="enter-gearvr" class="btn-large waves-effect waves-light" style="display: none;" href="#">
+                <img src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 62.7 52.375" enable-background="new 0 0 62.7 41.9" xml:space="preserve"><path d="M53.4,5.5h-44c-2.1,0-3.7,1.7-3.7,3.7v22.6c0,2.1,1.7,3.7,3.7,3.7h13.4c1.1,0,2.1-0.6,2.5-1.6l3-7.5c1.2-2.6,4.9-2.5,6,0.1  l2.6,7.3c0.4,1,1.4,1.7,2.5,1.7h13.9c2.1,0,3.7-1.7,3.7-3.7V9.3C57.2,7.2,55.5,5.5,53.4,5.5z M20.4,27c-3.2,0-5.7-2.6-5.7-5.7  s2.6-5.7,5.7-5.7s5.7,2.6,5.7,5.7S23.6,27,20.4,27z M42.4,27c-3.2,0-5.7-2.6-5.7-5.7s2.6-5.7,5.7-5.7s5.7,2.6,5.7,5.7  S45.6,27,42.4,27z"/></svg>' style="vertical-align:middle; height:45px;" /> Enter VR Experience
+            </a>
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s10 offset-s1  m6 offset-m3">
+            <div id="progressDiv" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+
+</div><a-scene antialias="true">
+  <a-assets timeout="1500">
+      <!-- Vonage Colors -->
+      <a-mixin id="keyblue" material="flatShading:true; color:#0077C8"></a-mixin>
+      <a-mixin id="keyblue-transparent" material="flatShading:true; color:#0077C8; opacity:0.85"></a-mixin>
+      <a-mixin id="keyorange" material="flatShading:true; color:#F5750C"></a-mixin>
+      <a-mixin id="keyorange-transparent" material="flatShading:true; color:#F5750C; opacity:0.85"></a-mixin>
+      <a-mixin id="keygrey" material="flatShading:true; color:#6D6F71"></a-mixin>
+      <a-mixin id="yellow" material="flatShading:true; color:#fcc137"></a-mixin>
+      <a-mixin id="yellow-transparent" material="flatShading:true; color:#F6B01E; opacity:0.25"></a-mixin>
+      <a-mixin id="lightblue" material="flatShading:true; color:#39A1E8"></a-mixin>
+      <a-mixin id="lightblue-transparent" material="flatShading:true; color:#91a0c9; opacity:0.5"></a-mixin>
+      <a-mixin id="darkblue" material="flatShading:true; color:#0b8cc5"></a-mixin>
+      <a-mixin id="darkblue-transparent" material="flatShading:true; color:#0b8cc5; opacity:0.5"></a-mixin>
+      <a-mixin id="darkerblue" material="flatShading:true; color:#06263A"></a-mixin>
+      <a-mixin id="black" material="flatShading:true; color:#000000;"></a-mixin>
+      <a-mixin id="white" material="flatShading:true; side:double; color:#ffffff;"></a-mixin>
+      <a-mixin id="white-transparent" material="flatShading:true; color:#ffffff; opacity:0.85;"></a-mixin>
+      <a-mixin id="lightgrey" material="flatShading:true; color:#ECECEC"></a-mixin>
+      <a-mixin id="grey" material="flatShading:true; color:#49494B"></a-mixin>
+      <a-mixin id="darkgrey" material="flatShading:true; color:#202020"></a-mixin>
+      
+      <a-mixin id="purple01" material="flatShading:true; color:#3d1e7c"></a-mixin>
+      <a-mixin id="purple02" material="flatShading:true; color:#5a1c7d"></a-mixin>
+      <a-mixin id="purple03" material="flatShading:true; color:#7c86b9"></a-mixin>
+      <a-mixin id="purple03" material="flatShading:true; color:#969bc1"></a-mixin>
+      <a-mixin id="blue01" material="flatShading:true; color:#0b8cc5"></a-mixin>
+      <a-mixin id="blue02" material="flatShading:true; color:#7e85bc"></a-mixin>
+      <a-mixin id="blue03" material="flatShading:true; color:#91a0c9"></a-mixin>
+      <a-mixin id="yellow01" material="flatShading:true; color:#ffd694"></a-mixin>
+      <a-mixin id="yellow02" material="flatShading:true; color:#fcc137"></a-mixin>
+      <a-mixin id="yellow03" material="flatShading:true; color:#ffecce"></a-mixin>
+      <a-mixin id="yellow04" material="flatShading:true; color:#fdb470"></a-mixin>
+      <a-mixin id="orange01" material="flatShading:true; color:#ffc097"></a-mixin>
+      <a-mixin id="orange02" material="flatShading:true; color:#df5a0f"></a-mixin>
+      <a-mixin id="orange03" material="flatShading:true; color:#871908"></a-mixin>
+      <a-mixin id="orange04" material="flatShading:true; color:#f8730a"></a-mixin>
+      <a-mixin id="orange05" material="flatShading:true; color:#ce550c"></a-mixin>
+      <a-mixin id="red01" material="flatShading:true; color:#fd8670"></a-mixin>
+      <a-mixin id="red02" material="flatShading:true; color:#f04622"></a-mixin>
+      <a-mixin id="red03" material="flatShading:true; color:#c01535"></a-mixin>
+      <a-mixin id="red04" material="flatShading:true; color:#cc4d5e"></a-mixin>
+      <a-mixin id="red05" material="flatShading:true; color:#f5685e"></a-mixin>
+      <!-- end Vonage Colors -->
+      <a-mixin id="metal" material="flatShading:false; metalness:0.25; roughness:0.25;"></a-mixin>
+      
+      <!-- Model labels and platform -->
+      <a-mixin id="modellabel"
+      	position="0 -0.6 0" 
+          geometry="primitive:cylinder; height:0.3; radius:2; side:front; openEnded:true; thetaStart:-20; thetaLength:40;"
+          material="color:#fff; transparent:true;"    
+      ></a-mixin>
+      <a-mixin id="modelplatform"
+      	geometry="primitive:ring; radiusInner:1.4; radiusOuter:2;" 
+      	position="0 -0.75 0"
+      	rotation="-90 0 0"
+      	material="color:#fff;"
+      ></a-mixin>
+      <!-- end Model labels and platform -->
+      
+      <!-- Contact Center mixins -->
+      <a-mixin id="disc"
+      	geometry="primitive:circle; radius:0.25;"
+          material="side:double;"
+          mixin="white-transparent"
+          rotation="0 180 0"
+          position="0 0 0"
+      ></a-mixin>
+      <a-mixin id="iconplanefront"
+      	geometry="primitive: plane; width:0.5; height:0.5" 
+      	material="color:#fff; transparent:true;" 
+      	position="0 0 0.025"
+      ></a-mixin>
+      <a-mixin id="iconplaneback"
+      	geometry="primitive: plane; width:0.5; height:0.5" 
+      	material="color:#fff; transparent:true;" 
+      	position="0 0 -0.025" rotation="0 180 0"
+      ></a-mixin>
+      <!-- end Contact Center mixins -->
+      
+      <!-- CRM mixins -->
+      <a-mixin id="crmdisc"
+            geometry="primitive:cylinder; height:0.085; radius:0.675;" 
+            material="color:#ffd694; transparent:true; opacity:1"
+      ></a-mixin>
+      <!-- end CRM mixins -->
+      
+      <!-- Vonage Reach mixins -->
+      <a-mixin id="flatphone"
+      	geometry="primitive: plane; width:0.3; height:0.5" 
+      	material="color:#fff; src:#ani-flatphone;" 
+      ></a-mixin>
+      <!-- end Vonage Reach mixins -->
+      <!-- Vonage main -->
+      <a-asset-item id="vonage-obj" src="assets/static/models/vonage.obj"></a-asset-item>
+      <a-asset-item id="nexmo-obj" src="assets/static/models/nexmo.obj"></a-asset-item>
+      <a-asset-item id="buildings-obj" src="assets/static/models/buildings.obj"></a-asset-item>
+      <a-asset-item id="buildings-mtl" src="assets/static/models/buildings.mtl"></a-asset-item>
+      <a-asset-item id="trunk_base-obj" src="assets/static/models/trunk_bottom.obj"></a-asset-item>
+      <a-asset-item id="trunk_base-mtl" src="assets/static/models/trunk_bottom.mtl"></a-asset-item>
+      <a-asset-item id="trunk_top-obj" src="assets/static/models/trunk_top.obj"></a-asset-item>
+      <a-asset-item id="trunk_top-mtl" src="assets/static/models/trunk_top.mtl"></a-asset-item>
+      
+      <img id="sky" src="assets/static/images/skyline.jpg" />
+      <img id="ground" src="assets/static/images/floor.jpg" />
+      <img id="platformtexture" src="assets/static/images/platform.jpg" />
+      <img id="centertexture" src="assets/static/images/centertexture.jpg" />
+      <img id="labelplatform" src="assets/static/images/modelplatform.jpg" />
+      
+      <img id="panel-btn-init" src="assets/static/images/panel-btn.png" />
+      <img id="panel-btn-hover" src="assets/static/images/panel-btn-hover.png" />
+      <img id="panel-btn-click" src="assets/static/images/panel-btn-click.png" />
+      <img id="bookmark-btn-label" src="assets/static/images/bookmark-btn-label.png" />
+      
+      <img id="intro-cardboard" src="assets/static/images/intro-cardboard.png"  />
+      <img id="intro-gearvr" src="assets/static/images/intro-gearvr.png"  />
+      <img id="panel-trunk" src="assets/static/images/trunkpanel.png" />
+      <!-- end Vonage main -->
+      
+      
+      <!-- AUDIO -->
+      
+      <!-- <audio id="background-snd" src="assets/static/audio/music.mp3" preload="auto"></audio>
+      <audio id="panel-btn-hover-snd" src="assets/static/audio/hover.mp3" preload="auto"></audio>
+      <audio id="panel-btn-click-snd" src="assets/static/audio/click1.mp3" preload="auto"></audio>
+      <audio id="teleport-snd" src="assets/static/audio/teleport.mp3" preload="auto"></audio>
+      <audio id="trunk-open-snd" src="assets/static/audio/trunk.mp3" preload="auto"></audio>
+      <audio id="trunk-coin-snd" src="assets/static/audio/coin.mp3" preload="auto"></audio>
+       -->
+       
+      <a-asset-item id="background-snd" src="assets/static/audio/music.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="panel-btn-hover-snd" src="assets/static/audio/hover.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="panel-btn-click-snd" src="assets/static/audio/click1.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="teleport-snd" src="assets/static/audio/teleport.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="trunk-open-snd" src="assets/static/audio/trunk.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id="trunk-coin-snd" src="assets/static/audio/coin.mp3" response-type="arraybuffer"></a-asset-item>
+      <!-- END AUDIO -->
+      
+      
+      <a-asset-item id="ucaascpaas-obj" src="assets/static/models/ucaascpaas.obj"></a-asset-item>
+      <a-asset-item id="ucaascpaas-mtl" src="assets/static/models/ucaascpaas.mtl"></a-asset-item>
+      
+      <img id="ucaascpaaslabel-bm" src="assets/static/images/ucaas/ucaascpaaslabel-bm.png" />
+      <img id="ucaascpaaslabel" src="assets/static/images/ucaas/ucaascpaaslabel.png" />
+      <!-- end UCaaS CPaaS -->
+      
+      
+      <!-- CRM -->
+      
+      <a-asset-item id="crm-obj" src="assets/static/models/crm.obj"></a-asset-item>
+      <a-asset-item id="crm-mtl" src="assets/static/models/crm.mtl"></a-asset-item>
+      
+      <a-asset-item id="crmdisc-obj" src="assets/static/models/crmdisc.obj"></a-asset-item>
+      <a-asset-item id="crmdisc-mtl" src="assets/static/models/crmdisc.mtl"></a-asset-item>
+      
+      <img id="salesforce-png" src="assets/static/images/crm/salesforce.png" />
+      <img id="gsuite-png" src="assets/static/images/crm/gsuite.png" />
+      <img id="zendesk-png" src="assets/static/images/crm/zendesk.png" />
+      <img id="oracle-png" src="assets/static/images/crm/oracle.png" />
+      <img id="office-png" src="assets/static/images/crm/office.png" />
+      <img id="dynamics-png" src="assets/static/images/crm/dynamics.png" />
+      <img id="clio-png" src="assets/static/images/crm/clio.png" />
+      
+      <img id="crmintegrationslabel-bm" src="assets/static/images/crm/crmintegrationslabel-bm.png" />
+      <img id="crmintegrationslabel" src="assets/static/images/crm/crmintegrationslabel.png" />
+      <!-- end CRM -->
+      
+      <!-- ContactCenter -->
+      <a-asset-item id="contactcenter-obj" src="assets/static/models/contactcenter.obj"></a-asset-item>
+      <a-asset-item id="contactcenter-mtl" src="assets/static/models/contactcenter.mtl"></a-asset-item>
+      
+      <img id="agents-png" src="assets/static/images/contactcenter/contactcenteragent.png" />
+      <img id="agent-png" src="assets/static/images/contactcenter/contactcenteragentone.png" />
+      <img id="manager-png" src="assets/static/images/contactcenter/contactcentermanager.png" />
+      <img id="aibot-png" src="assets/static/images/contactcenter/contactcenteraibot.png" />
+      <img id="emoji1" src="assets/static/images/contactcenter/emoji1.jpg" />
+      <img id="emoji2" src="assets/static/images/contactcenter/emoji2.jpg" />
+      <img id="emoji3" src="assets/static/images/contactcenter/emoji3.jpg" />
+      <img id="emoji4" src="assets/static/images/contactcenter/emoji4.jpg" />
+      <img id="emoji5" src="assets/static/images/contactcenter/emoji5.jpg" />
+      <img id="emoji6" src="assets/static/images/contactcenter/emoji6.jpg" />
+      
+      <img id="languageus" src="assets/static/images/contactcenter/us.png" />
+      <img id="languagespanish" src="assets/static/images/contactcenter/spanish.png" />
+      <img id="languagefrench" src="assets/static/images/contactcenter/french.png" />
+      
+      <img id="messenger-png" src="assets/static/images/contactcenter/messenger.png" />
+      <img id="workplace-png" src="assets/static/images/contactcenter/workplace.png" />
+      <img id="line-png" src="assets/static/images/contactcenter/sms.png" />
+      <img id="viber-png" src="assets/static/images/contactcenter/phone.png" />
+      <img id="wechat-png" src="assets/static/images/contactcenter/email.png" />
+      <img id="whatsapp-png" src="assets/static/images/contactcenter/twitter.png" />
+      
+      <img id="panel-contactcenter" src="assets/static/images/contactcenter/contactcenterpanel.png" />
+      <img id="panel-contactcenter-btn-label-1" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-1.png" />
+      <img id="panel-contactcenter-btn-label-2" src="assets/static/images/contactcenter/contactcenterpanel-btn-label-2.png" />
+      
+      <img id="contactcenterlabel-bm" src="assets/static/images/contactcenter/contactcenterlabel-bm.png" />
+      <img id="contactcenterlabel" src="assets/static/images/contactcenter/contactcenterlabel.png" />
+      <!-- end ContactCenter -->
+      
+      <!-- SmartWan -->
+      <a-asset-item id="smartwan-obj" src="assets/static/models/smartwan.obj"></a-asset-item>
+      <a-asset-item id="smartwan-mtl" src="assets/static/models/smartwan.mtl"></a-asset-item>
+      
+      <img id="panel-smartwan" src="assets/static/images/smartwan/smartwanpanel.png" />
+      <img id="panel-smartwan-btn-label" src="assets/static/images/smartwan/smartwanpanel-btn-label.png" />
+      
+      <img id="smartwanlabel-bm" src="assets/static/images/smartwan/smartwanlabel-bm.png" />
+      <img id="smartwanlabel" src="assets/static/images/smartwan/smartwanlabel.png" />
+      
+      <img id="smartwan-lid-ext" src="assets/static/images/ani/smartwan-lid-ext.gif" />
+      <img id="smartwan-lid-int" src="assets/static/images/ani/smartwan-lid-int.gif" />
+      <img id="smartwan-box-int" src="assets/static/images/ani/smartwan-box-int.gif" />
+      <!-- end SmartWan -->
+      
+      <!-- Chime -->
+      <a-asset-item id="laptop-obj" src="assets/static/models/laptop.obj"></a-asset-item>
+      <a-asset-item id="laptop-mtl" src="assets/static/models/laptop.mtl"></a-asset-item>
+      <a-asset-item id="desktop-obj" src="assets/static/models/desktop.obj"></a-asset-item>
+      <a-asset-item id="desktop-mtl" src="assets/static/models/desktop.mtl"></a-asset-item>
+      <a-asset-item id="tablet-obj" src="assets/static/models/tablet.obj"></a-asset-item>
+      <a-asset-item id="tablet-mtl" src="assets/static/models/tablet.mtl"></a-asset-item>
+      <a-asset-item id="smartphone-obj" src="assets/static/models/smartphone.obj"></a-asset-item>
+      <a-asset-item id="smartphone-mtl" src="assets/static/models/smartphone.mtl"></a-asset-item>
+      
+      <img id="p1" src="assets/static/images/chime/p1.jpg" />
+      <img id="p2" src="assets/static/images/chime/p2.jpg" />
+      <img id="p3" src="assets/static/images/chime/p3.jpg" />
+      <img id="p4" src="assets/static/images/chime/p4.jpg" />
+      <img id="p5" src="assets/static/images/chime/p5.jpg" />
+      <img id="p6" src="assets/static/images/chime/p6.jpg" />
+      <img id="p7" src="assets/static/images/chime/p7.jpg" />
+      <img id="p8" src="assets/static/images/chime/p8.jpg" />
+      <img id="p9" src="assets/static/images/chime/p9.jpg" />
+      <img id="p10" src="assets/static/images/chime/p10.jpg" />
+      <img id="p11" src="assets/static/images/chime/p11.jpg" />
+      <img id="p12" src="assets/static/images/chime/p12.jpg" />
+      <img id="p13" src="assets/static/images/chime/p13.jpg" />
+      
+      <img id="panel-chime" src="assets/static/images/chime/chimepanel.png" />
+      <img id="panel-chime-btn-label-1" src="assets/static/images/chime/chimepanel-btn-label-1.png" />
+      <img id="panel-chime-btn-label-2" src="assets/static/images/chime/chimepanel-btn-label-2.png" />
+      
+      <img id="amazonchimelabel-bm" src="assets/static/images/chime/amazonchimelabel-bm.png" />
+      <img id="amazonchimelabel" src="assets/static/images/chime/amazonchimelabel.png" />
+      
+      <img id="ani-screen-base" src="assets/static/images/ani/chime-screen-base.gif" />
+      <img id="ani-screen-call" src="assets/static/images/ani/chime-screen-call.png" />
+      <!-- end Chime -->
+      
+      <!-- Vonage Reach -->
+      <a-asset-item id="reach-obj" src="assets/static/models/reach.obj"></a-asset-item>
+      <a-asset-item id="reach-mtl" src="assets/static/models/reach.mtl"></a-asset-item>
+      
+      <a-asset-item id="reachslice-obj" src="assets/static/models/reachslice.obj"></a-asset-item>
+      <a-asset-item id="reachslice-mtl" src="assets/static/models/reachslice.mtl"></a-asset-item>
+      
+      <a-asset-item id="phone-obj" src="assets/static/models/phone.obj"></a-asset-item>
+      <a-asset-item id="phone-mtl" src="assets/static/models/phone.mtl"></a-asset-item>
+      
+      <a-asset-item id="shoe-obj" src="assets/static/models/shoe.obj"></a-asset-item>
+      <a-asset-item id="shoe2-obj" src="assets/static/models/shoe.obj"></a-asset-item>
+      <a-asset-item id="shoe-mtl" src="assets/static/models/shoe.mtl"></a-asset-item>
+      
+      <img id="reach-send" src="assets/static/images/reach/sent123.png" />
+      <img id="reach-receive-house" src="assets/static/images/reach/receive-house.png" />
+      <img id="reach-receive-shoe" src="assets/static/images/reach/receive-shoe.png" />
+      <img id="reach-sign-shoe" src="assets/static/images/reach/shoe-sign.png" />
+      <img id="reach-sign-house" src="assets/static/images/reach/house-sign.png" />
+      
+      <img id="reach-realestate-data" src="assets/static/images/reach/realestate-data-sheet.png" />
+      <img id="reach-retail-data" src="assets/static/images/reach/retail-data-sheet.png" />
+      
+      <a-asset-item id="house-obj" src="assets/static/models/house.obj"></a-asset-item>
+      <a-asset-item id="house2-obj" src="assets/static/models/house.obj"></a-asset-item>
+      <a-asset-item id="house-mtl" src="assets/static/models/house.mtl"></a-asset-item>
+      
+      <a-asset-item id="building-retail-obj" src="assets/static/models/building.obj"></a-asset-item>
+      <a-asset-item id="building-retail-mtl" src="assets/static/models/building.mtl"></a-asset-item>
+      
+      <a-asset-item id="building-realestate-obj" src="assets/static/models/building2.obj"></a-asset-item>
+      <a-asset-item id="building-realestate-mtl" src="assets/static/models/building2.mtl"></a-asset-item>
+      
+      
+      <img id="panel-vonagereach" src="assets/static/images/reach/vonagereachpanel.png" />
+      <img id="panel-vonagereach-btn-label-1" src="assets/static/images/reach/vonagereachpanel-btn-label-1.png" />
+      <img id="panel-vonagereach-btn-label-2" src="assets/static/images/reach/vonagereachpanel-btn-label-2.png" />
+      
+      <img id="vonagereachlabel-bm" src="assets/static/images/reach/vonagereachlabel-bm.png" />
+      <img id="vonagereachlabel" src="assets/static/images/reach/vonagereachlabel.png" />
+      
+      <img id="ani-flatphone" src="assets/static/images/ani/flatphone.jpg" />
+      <!-- end Vonage Reach -->
+      
+      <!-- SIP Trunking -->
+      <video id="sip_video" loop="false" src="assets/static/video/sip.mp4"></video>
+      <!-- UCaaS CPaaS -->
+      <video id="ucaas_video" loop="false" src="assets/static/video/ucaas.mp4"></video>
+      <!-- CRM -->
+      <video id="crm_video" loop="false" src="assets/static/video/crm.mp4"></video>
+      
+      
+      <img id="siptrunkinglabel-bm" src="assets/static/images/sip/siptrunkinglabel-bm.png" />
+      <img id="siptrunkinglabel" src="assets/static/images/sip/siptrunkinglabel.png" />
+      <!-- end SIP Trunking --></a-assets>
+  
+  <a-light type="directional" color="#eee" intensity="0.5" position="0 4 2"></a-light>
+  <a-light type="ambient" color="#eee"></a-light><a-sky src="#sky"></a-sky><!-- Background Music & sounds-->
+  <a-entity id="music" 
+  	sound="
+  		src: #background-snd; 
+  		autoplay:false; 
+  		loop:true; 
+  		volume:0.1;"
+  ></a-entity>
+  
+  <a-entity id="panelhoversound" 
+  	sound="
+  		src: #panel-btn-hover-snd; 
+  		autoplay:false; 
+  		loop:false"
+  ></a-entity>
+  
+  <a-entity id="panelclicksound" 
+  	sound="
+  		src: #panel-btn-click-snd; 
+  		autoplay:false; 
+  		loop:false"
+  ></a-entity>
+  
+  <a-entity id="teleportsound" 
+  	sound="
+  		src: #teleport-snd; 
+  		autoplay:false; 
+  		loop:false"
+  ></a-entity>
+  
+  
+  <a-entity id="trunkopensound" 
+  	sound="
+  		src: #trunk-open-snd; 
+  		autoplay:false; 
+  		loop:false"
+  ></a-entity>
+  
+  <a-entity id="trunkcoinsound" 
+  	sound="
+  		src: #trunk-coin-snd; 
+  		autoplay:false; 
+  		loop:false"
+  ></a-entity>
+  <!-- End Background Music & sounds-->
+  
+  <a-entity 
+  	id="platform" 
+  	geometry="primitive:cylinder; height:0.025; radius:4.75;" 
+  	material="color:#fff; src:#platformtexture"
+  	position="0 0 0"
+  >
+      <a-entity 
+      	geometry="primitive:circle; radius:1;"  
+  		material="color:#fff; src:#centertexture"
+  		position="0 0.1 0"
+  		rotation="-90 0 0"
+      ></a-entity>
+      <a-entity 
+      	geometry="primitive:circle; radius:1.05;"  
+  		material="color:#2d283d; opacity:0.5"
+  		position="0 0.025 0"
+  		rotation="-90 0 0"
+      ></a-entity>    
+  </a-entity>	
+  
+  <a-entity 
+  	id="ground" 
+  	position="0 -80 0"
+  >
+  	<a-entity id="floor" geometry="primitive:plane; height:100; width:100;" material="color:#fff; src:#ground" rotation="-90 0 0">
+  	</a-entity>
+      <a-entity 
+        obj-model="obj: #buildings-obj; mtl: #buildings-mtl" 
+        scale="25 25 26"
+        position="0 -0.3 0"
+      ></a-entity>
+  </a-entity><!-- Logos -->
+  <a-entity id="vonage" obj-model="obj: #vonage-obj;" mixin="keyorange metal" position="0 0.5 0">
+      <a-entity geometry="primitive:sphere; radius:0.2;" mixin="keyblue metal" position="0 0.97 0"></a-entity>
+      <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+  </a-entity>
+  <a-entity id="nexmo" obj-model="obj: #nexmo-obj;" mixin="keygrey metal" position="0 0.2 0">
+      <a-entity geometry="primitive:cylinder; height:0.25; radius:0.15;" mixin="keyblue metal" position="0 -0.1 0"></a-entity>
+      <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 -360 0" easing="linear" repeat="indefinite"></a-animation>
+  </a-entity>
+  <!-- End Logos -->
+  <!-- BEGIN AMAZON-CHIME -->
+  <a-entity id="amazon-chime" scale="0.25 0.25 0.25" position="-3.15 0.5 -8.7" rotation="0 20 0">
+      <a-entity id="funnel"
+          geometry="primitive:cylinder; height:90; radius:4.75;" mixin="lightblue-transparent" material="opacity:0.125"
+          animation="property: rotation; to: 0 360; dur: 10000; easing: linear; autoplay: true; loop:true"
+          >
+          <a-entity geometry="primitive:cylinder; height:70; radius:0.5;" mixin="darkblue-transparent" position="0 0 0">
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:75; radius:1.5;" mixin="darkblue-transparent" position="0 0 0">
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:80; radius:2.5;" mixin="darkblue-transparent" position="0 0 0">
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:85; radius:3.5;" mixin="lightblue-transparent" position="0 0 0" material="opacity:0.25">
+          </a-entity>
+          <a-entity position="0 16 0" rotation="0 120 0">
+              <a-curvedimage src="#p1" height="2.5" radius="4.25" theta-start="340" theta-length="40"></a-curvedimage>
+              <a-curvedimage src="#p2" height="2.5" radius="4.25" theta-start="160" theta-length="40"></a-curvedimage>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 -4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 -3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 -2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 -1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+          </a-entity>
+          <a-entity position="0 12 0" rotation="0 90 0">
+              <a-curvedimage src="#p3" height="2.5" radius="4.25" theta-start="340" theta-length="40"></a-curvedimage>
+              <a-curvedimage src="#p4" height="2.5" radius="4.25" theta-start="160" theta-length="40"></a-curvedimage>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 -4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 -3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 -2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 -1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+          </a-entity>
+          <a-entity position="0 8 0" rotation="0 60 0">
+              <a-curvedimage src="#p5" height="2.5" radius="4.25" theta-start="340" theta-length="40"></a-curvedimage>
+              <a-curvedimage src="#p6" height="2.5" radius="4.25" theta-start="160" theta-length="40"></a-curvedimage>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 -4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 -3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 -2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 -1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+          </a-entity>
+          <a-entity position="0 4 0" rotation="0 30 0">
+              <a-curvedimage src="#p7" height="2.5" radius="4.25" theta-start="340" theta-length="40"></a-curvedimage>
+              <a-curvedimage src="#p8" height="2.5" radius="4.25" theta-start="160" theta-length="40"></a-curvedimage>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 -4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 -3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 -2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 -1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+          </a-entity>
+          <a-entity position="0 0 0" rotation="0 0 0">
+              <a-curvedimage src="#p9" height="2.5" radius="4.25" theta-start="340" theta-length="40"></a-curvedimage>
+              <a-curvedimage src="#p10" height="2.5" radius="4.25" theta-start="160" theta-length="40"></a-curvedimage>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 -4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 -3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 -2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 -1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:2; width:2;" mixin="white" position="0 0 4">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.75; width:1.75;" mixin="white" position="0 0 3">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.5; width:1.5;" mixin="white" position="0 0 2">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1.25; width:1.25;" mixin="white" position="0 0 1">
+              </a-entity>
+              <a-entity geometry="primitive:plane; height:1; width:1;" mixin="white" position="0 0 0">
+              </a-entity>
+          </a-entity>
+      </a-entity>
+  
+      <!-- animation block -->
+      <!-- device-demo -->
+      <a-entity id="chimedevicedemo" animation-timeline="timeline: #deviceDemoTimeline; startEvents: chime-device-demo-play"></a-entity>
+  
+      <a-timeline id="deviceDemoTimeline">
+  
+  <!-- setup devices-->
+          <a-timeline-group>            
+              <a-timeline-animation select="#product_chime" name="shiftout" offset="0"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-screen-holder" name="show" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="show" offset="0"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- show screen and alert -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen" name="moveout" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen" name="scaleup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen-alert" name="popup" offset="1500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen-alert" name="fadein" offset="1500"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- hide alert and show face -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen-alert" name="fadeout" offset="2000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen-call" name="fadein" offset="2000"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- drop into phone -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen" name="scaleback" offset="1000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-smartphone" name="popup" offset="1000"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- shift phone down and pop other devices -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-smartphone" name="popinplace" offset="0"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-laptop" name="popin" offset="1000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-desktop" name="popin" offset="2000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-tablet" name="popin" offset="3000"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-devices" name="rotate1" offset="1000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="rotate2" offset="2000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="rotate3" offset="3000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="rotate4" offset="4000"></a-timeline-animation>
+          </a-timeline-group> 
+  
+  <!-- cleanup devices -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen-holder" name="hide" offset="4000"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="hide" offset="4000"></a-timeline-animation>
+              <a-timeline-animation select="#product_chime" name="shiftback" offset="4000"></a-timeline-animation>
+          </a-timeline-group> 
+  
+      </a-timeline>
+  
+  
+      <a-entity id="chimedevicedemohide" animation-timeline="timeline: #deviceDemoTimelineHide; startEvents: chime-device-demo-hide"></a-entity>
+  
+      <a-timeline id="deviceDemoTimelineHide">
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen-holder" name="hide"></a-timeline-animation>
+              <a-timeline-animation select="#chime-devices" name="hide"></a-timeline-animation>
+          </a-timeline-group>            
+      </a-timeline>
+  
+      <a-entity id="chime-device-demo" position="0 1 12" scale="4 4 4">
+          <a-entity id="chime-screen-holder"
+            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+            animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+              >
+              <a-entity id="chime-screen"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#ani-screen-base"
+                  position="0 0 -15" 
+                  scale="0 0 0"
+                  animation__moveout="
+                      property: position; 
+                      from: 0 0 -15; 
+                      to: 0 1 0.75; 
+                      dur: 1500; 
+                      easing: easeOutExpo; 
+                      autoplay: false"        
+                  animation__scaleup="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 1500; 
+                      easing: easeOutExpo; 
+                      autoplay: false" 
+                  animation__scaleback="
+                      property: scale; 
+                      from: 1 1 1; 
+                      to: 0 0 0; 
+                      delay: 4000; 
+                      dur: 500; 
+                      easing: easeInOutQuad; 
+                      autoplay: false" 
+                  >  
+                  <a-entity id="chime-screen-call"
+                      geometry="primitive:plane; height: 0.4; width: 0.6;"
+                      material="color:#fff; transparent:true; opacity:0; src:#p2"
+                      position="0 0 0.1" 
+                      animation__fadein="
+                          property: material.opacity; 
+                          from: 0; 
+                          to: 1; 
+                          dur: 500; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  
+                      >    
+                  </a-entity>                   
+                  <a-entity id="chime-screen-alert"
+                      geometry="primitive:plane; height: 0.4; width: 0.6;"
+                      material="color:#fff; transparent:true; opacity:0; src:#ani-screen-call"
+                      position="0 0 -0.01" 
+                      animation__popup="
+                          property: position; 
+                          from: 0 0 -0.01; 
+                          to: 0 0 0.15; 
+                          dur: 500; 
+                          easing: easeOutElastic; 
+                          autoplay: false"  
+                      animation__fadein="
+                          property: material.opacity; 
+                          from: 0; 
+                          to: 1; 
+                          dur: 200; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  
+                      animation__fadeout="
+                          property: material.opacity; 
+                          from: 1; 
+                          to: 0; 
+                          dur: 500; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  
+                      >    
+                  </a-entity> 
+              </a-entity>
+          </a-entity>
+          <a-entity id="chime-devices" 
+              position="0 -0.5 0"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+              animation__rotate1="
+                  property: rotation; 
+                  from: 0 0 0; 
+                  to: 0 90 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                    
+              animation__rotate2="
+                  property: rotation; 
+                  from: 0 90 0; 
+                  to: 0 180 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                    
+              animation__rotate3="
+                  property: rotation; 
+                  from: 0 180 0; 
+                  to: 0 270 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                    
+              animation__rotate4="
+                  property: rotation; 
+                  from: 0 270 0; 
+                  to: 0 360 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                    
+              >
+              <a-entity id="chime-smartphone" 
+                  position="0 1.1 0.6" 
+                  rotation="0 0 0"
+                  scale="0 0 0"
+                  animation__popup="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 800; 
+                      easing: easeOutElastic; 
+                      autoplay: false"
+                  animation__popinplace="
+                      property: position; 
+                      from: 0 1.1 0.6; 
+                      to: 0 0 0.6; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"        
+                  >
+                  <a-entity 
+                      obj-model="obj: #smartphone-obj; mtl: #smartphone-mtl"
+                      scale="0.5 0.5 0.5"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                  ></a-entity> 
+              </a-entity>  
+              <a-entity id="chime-tablet" 
+                  position="0.59 0 0" 
+                  rotation="0 90 0"
+                  scale="0 0 0"
+                  animation__popin="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"        
+                  >
+                  <a-entity 
+                      obj-model="obj: #tablet-obj; mtl: #tablet-mtl"
+                      scale="0.5 0.5 0.5"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                  ></a-entity> 
+              </a-entity>  
+              <a-entity id="chime-laptop" 
+                  position="-0.75 0 0" 
+                  rotation="0 0 0"
+                  scale="0 0 0"
+                  animation__popin="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"        
+                  >
+                  <a-entity 
+                      obj-model="obj: #laptop-obj; mtl: #laptop-mtl"
+                      scale="0.5 0.5 0.5"
+                      position="-0.02 0 0.12"
+                      rotation="0 190 0"
+                  ></a-entity> 
+              </a-entity>  
+              <a-entity id="chime-desktop" 
+                  position="-0.05 0 -0.37" 
+                  rotation="0 180 0"
+                  scale="0 0 0"
+                  animation__popin="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"        
+                  >
+                  <a-entity 
+                      obj-model="obj: #desktop-obj; mtl: #desktop-mtl"
+                      scale="0.5 0.5 0.5"
+                      position="0 0 0.200"
+                      rotation="0 -110 0"
+                  ></a-entity> 
+              </a-entity>  
+          </a-entity>
+      </a-entity>
+      <!-- END device-demo -->
+  
+      <!-- capacity-demo -->
+      <a-entity id="chimecapacitydemo" animation-timeline="timeline: #deviceCapacityTimeline; startEvents: chime-capacity-demo-play"></a-entity>
+  
+      <a-timeline id="deviceCapacityTimeline">   
+  <!-- setup capacity-->
+          <a-timeline-group>            
+              <a-timeline-animation select="#product_chime" name="shiftout" offset="0"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-screen2" name="show" offset="0"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- show first screen -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen2" name="moveout" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen2" name="scaleup" offset="0"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- show face and scale full-->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-p1" name="full" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p1" name="center" offset="0"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- split to 4 -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-p1" name="quart" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p1" name="tl" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p2" name="show" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p2" name="quart" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p2" name="tr" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p3" name="show" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p3" name="quart" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p3" name="bl" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p4" name="show" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p4" name="quart" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p4" name="br" offset="500"></a-timeline-animation>
+          </a-timeline-group>  
+  
+  <!-- shift to 8 -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-p5" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p6" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p7" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p8" name="scaleup" offset="500"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-p5" name="shiftup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p6" name="shiftup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p7" name="shiftdown" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p8" name="shiftdown" offset="500"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- shift to 16 -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-p9" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p10" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p11" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p12" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p13" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p14" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p15" name="scaleup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p16" name="scaleup" offset="500"></a-timeline-animation>
+  
+              <a-timeline-animation select="#chime-p9" name="shiftleft" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p10" name="shiftleft" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p11" name="shiftleft" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p12" name="shiftleft" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p13" name="shiftright" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p14" name="shiftright" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p15" name="shiftright" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p16" name="shiftright" offset="500"></a-timeline-animation>
+          </a-timeline-group>            
+  <!-- scale down -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-screen2" name="scaledown" offset="3000"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- cleanup capacity -->
+          <a-timeline-group>
+              <a-timeline-animation select="#chime-p1" name="reset" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-p1" name="reset2" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#chime-screen2" name="hide" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#product_chime" name="shiftback" offset="0"></a-timeline-animation>
+          </a-timeline-group>            
+  
+      </a-timeline>
+  
+  
+      <a-entity id="chimecapacitydemohide" animation-timeline="timeline: #deviceCapacityTimelineHide; startEvents: chime-capacity-demo-hide"></a-entity>
+  
+      <a-timeline id="deviceCapacityTimelineHide">
+          <a-timeline-animation select="#chime-screen2" name="hide" offset="0"></a-timeline-animation>
+      </a-timeline>
+  
+  
+      <a-entity id="chime-capacity-demo" position="0 1 12" scale="4 4 4">
+          <a-entity id="chime-screen2"
+              geometry="primitive:plane; height: 0.8; width: 1.2;"
+              material="color:#fff; src:#ani-screen-base"
+              position="0 0 -15"
+              scale="0 0 0"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+              animation__moveout="
+                  property: position; 
+                  from: 0 0 -15; 
+                  to: 0 1 0; 
+                  dur: 1500; 
+                  easing: easeOutExpo; 
+                  autoplay: false"        
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 1500; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 
+              >
+              <a-entity id="chime-p1"
+                  geometry="primitive:plane; height: 0.8; width: 1.2;"
+                  material="color:#fff; src:#p2"
+                  position="-0.13 -0.07 0.01"
+                  scale="0.780 0.840 1"
+                  animation__full="
+                      property: scale; 
+                      from: 0.780 0.840 1; 
+                      to: 1 1 1; 
+                      dur: 1500; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__center="
+                      property: position; 
+                      from: -0.13 -0.07 0.01; 
+                      to: 0 0 0.04; 
+                      dur: 1500; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__quart="
+                      property: scale; 
+                      from: 1 1 1; 
+                      to: 0.5 0.5 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"
+                  animation__tl="
+                      property: position; 
+                      from: 0 0 0.04; 
+                      to: -0.3 0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false" 
+                  animation__reset="
+                      property: position; 
+                      to: -0.13 -0.07 0.01; 
+                      dur: 1; 
+                      autoplay: false"
+                  animation__reset2="
+                      property: scale; 
+                      to: 0.780 0.840 1; 
+                      dur: 1; 
+                      autoplay: false"
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>        
+              
+              <a-entity id="chime-p2"
+                  geometry="primitive:plane; height: 0.8; width: 1.2;"
+                  material="color:#fff; src:#p4"
+                  position="0 0 0.03"
+                  scale="0 0 0"
+                  animation__quart="
+                      property: scale; 
+                      from: 1 1 1; 
+                      to: 0.5 0.5 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__tr="
+                      property: position; 
+                      from: 0 0 0.03; 
+                      to: 0.3 0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"  
+                  animation__reset="
+                      property: position; 
+                      to: 0 0 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                                  
+                  animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+                  animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+              ></a-entity>  
+  
+              <a-entity id="chime-p3"
+                  geometry="primitive:plane; height: 0.8; width: 1.2;"
+                  material="color:#fff; src:#p9"
+                  position="0 0 0.02"
+                  scale="0 0 0"
+                  animation__quart="
+                      property: scale; 
+                      from: 1 1 1; 
+                      to: 0.5 0.5 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__bl="
+                      property: position; 
+                      from: 0 0 0.02; 
+                      to: -0.3 -0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0 0 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                                
+                  animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+                  animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"                    
+              ></a-entity>  
+  
+              <a-entity id="chime-p4"
+                  geometry="primitive:plane; height: 0.8; width: 1.2;"
+                  material="color:#fff; src:#p3"
+                  position="0 0 0.01"
+                  scale="0 0 0"
+                  animation__quart="
+                      property: scale; 
+                      from: 1 1 1; 
+                      to: 0.5 0.5 1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__br="
+                      property: position; 
+                      from: 0 0 0.01; 
+                      to: 0.3 -0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0 0 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                                 
+                  animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+                  animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"                    
+              ></a-entity>  
+  
+              <a-entity id="chime-p5"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p1"
+                  position="0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftup="
+                      property: position; 
+                      from: 0.3 0.2 -0.02; 
+                      to: 0.3 0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p6"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p13"
+                  position="-0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftup="
+                      property: position; 
+                      from: -0.3 0.2 -0.02; 
+                      to: -0.3 0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+  
+              <a-entity id="chime-p7"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p7"
+                  position="0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftdown="
+                      property: position; 
+                      from: 0.3 -0.2 -0.02; 
+                      to: 0.3 -0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p8"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p12"
+                  position="-0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftdown="
+                      property: position; 
+                      from: -0.3 -0.2 -0.02; 
+                      to: -0.3 -0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+  
+  
+              <a-entity id="chime-p9"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p11"
+                  position="-0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"                
+                  animation__shiftleft="
+                      property: position; 
+                      from: -0.3 -0.6 -0.02; 
+                      to: -0.9 -0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p10"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p8"
+                  position="-0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"                
+                  animation__shiftleft="
+                      property: position; 
+                      from: -0.3 -0.2 -0.02; 
+                      to: -0.9 -0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p11"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p12"
+                  position="-0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"                
+                  animation__shiftleft="
+                      property: position; 
+                      from: -0.3 0.2 -0.02; 
+                      to: -0.9 0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p12"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p5"
+                  position="-0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"                
+                  animation__shiftleft="
+                      property: position; 
+                      from: -0.3 0.6 -0.02; 
+                      to: -0.9 0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: -0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+  
+              <a-entity id="chime-p13"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p10"
+                  position="0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftright="
+                      property: position; 
+                      from: 0.3 -0.6 -0.02; 
+                      to: 0.9 -0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p14"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p11"
+                  position="0.3 -0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftright="
+                      property: position; 
+                      from: 0.3 -0.2 -0.02; 
+                      to: 0.9 -0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 -0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p15"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p13"
+                  position="0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftright="
+                      property: position; 
+                      from: 0.3 0.2 -0.02; 
+                      to: 0.9 0.2 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+              <a-entity id="chime-p16"
+                  geometry="primitive:plane; height: 0.4; width: 0.6;"
+                  material="color:#fff; src:#p6"
+                  position="0.3 0.2 -0.02"
+                  scale="0 0 0"
+                  animation__scaleup="
+                      property: scale;
+                      from: 0 0 0;
+                      to: 1 1 1;
+                      dur: 250;
+                      easing: easeOutExpo;
+                      autoplay: false"
+                  animation__shiftright="
+                      property: position; 
+                      from: 0.3 0.6 -0.02; 
+                      to: 0.9 0.6 0.1; 
+                      dur: 1000; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                
+                  animation__reset="
+                      property: position; 
+                      to: 0.3 0.2 -0.02; 
+                      dur: 1; 
+                      autoplay: false"                
+                  animation__scaledown="
+                      property: scale; 
+                      to: 0 0 0; 
+                      dur: 50; 
+                      easing: easeOutExpo; 
+                      autoplay: false"                                         
+              ></a-entity>
+  
+  
+          </a-entity>
+      </a-entity>
+      <!-- END capacity-demo -->
+  
+  
+  </a-entity>
+  <!-- END AMAZON CHIME -->
+  
+  
+  <a-entity position="-3.15 0.5 -8.7">
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #amazonchimelabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity><!-- BEGIN CONTACT CENTER  -->
+  <a-entity id="contact-center" position="-7.4 0.5 -4.3">
+      <a-entity 
+        obj-model="obj: #contactcenter-obj; mtl: #contactcenter-mtl"
+        scale="1.5 1.5 1"
+        position="-2.22 0 1.42"
+        rotation="0 122.5 0"
+      ></a-entity>
+      <a-entity id="logos"
+        position="0 1.3 0"
+        >    
+        <a-entity position="-0.13 0 0.92"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #messenger-png"></a-entity><a-entity mixin="iconplaneback" material="src: #messenger-png"></a-entity>
+        </a-entity>           
+  
+        <a-entity position="-0.62 0 -0.41"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #line-png"></a-entity><a-entity mixin="iconplaneback" material="src: #line-png"></a-entity>
+        </a-entity>
+  
+        <a-entity position="0.38 0 0.6"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #viber-png"></a-entity><a-entity mixin="iconplaneback" material="src: #viber-png"></a-entity>
+        </a-entity>            
+  
+        <a-entity position="-0.12 0 -0.74"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #wechat-png"></a-entity><a-entity mixin="iconplaneback" material="src: #wechat-png"></a-entity>
+        </a-entity>          
+  
+        <a-entity position="0.86 0 0.25"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #whatsapp-png"></a-entity><a-entity mixin="iconplaneback" material="src: #whatsapp-png"></a-entity>
+        </a-entity>             
+  
+        <a-entity position="0.4 0 -1.05"
+          animation="property: rotation; to: 0 360; dur: 3000; easing: linear; autoplay: true; loop:true"
+        >
+          <a-entity mixin="disc"></a-entity><a-entity mixin="iconplanefront" material="src: #workplace-png"></a-entity><a-entity mixin="iconplaneback" material="src: #workplace-png"></a-entity>
+        </a-entity>
+      </a-entity>
+  
+  
+      <!-- animation block -->
+      <!-- skills-demo -->
+  
+      <a-entity id="contactcenterskillsdemo" animation-timeline="timeline: #skillsDemoTimeline; startEvents: contactcenter-skills-demo-play"></a-entity>
+      <a-timeline id="skillsDemoTimeline">
+          <a-timeline-animation select="#product_ccenter" name="shiftout"></a-timeline-animation>
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#skills-center-holder" name="show"></a-timeline-animation>
+              <a-timeline-animation select="#center-aibot" name="turn" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#center-aibot" name="moveoff" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#center-aibot" name="moveout" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#aibot" name="popout" offset="0"></a-timeline-animation>
+          </a-timeline-group>
+  
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#language-gate" name="popup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#language-english" name="popup" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep1" name="popup" offset="1500"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep1" name="shoot" offset="1500"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep2" name="popup" offset="1800"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep2" name="shoot" offset="1800"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep3" name="popup" offset="2100"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep3" name="shoot" offset="2100"></a-timeline-animation>
+          </a-timeline-group>
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#center-singlerep1" name="green" offset="300"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep2" name="yellow" offset="300"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep3" name="yellow" offset="300"></a-timeline-animation>
+          </a-timeline-group>
+  
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#center-singlerep1" name="yellow" offset="300"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep2" name="green" offset="300"></a-timeline-animation>
+              <a-timeline-animation select="#center-singlerep3" name="red" offset="300"></a-timeline-animation>
+          </a-timeline-group>
+  
+  
+  <a-timeline-animation select="#skills-center-holder" name="hide" offset="4000"></a-timeline-animation>
+  <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
+      </a-timeline>
+  
+      <a-entity id="contactcenterskillsdemohide" animation-timeline="timeline: #skillsDemoTimelineHide; startEvents: contactcenter-skills-demo-hide"></a-entity>
+      <a-timeline id="skillsDemoTimelineHide">
+          <a-timeline-group>
+              <a-timeline-animation select="#skills-center-holder" name="hide"></a-timeline-animation>
+          </a-timeline-group>
+      </a-timeline>
+  
+      <a-entity id="skills-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
+  
+        <a-entity id="skills-center-holder"
+          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+          >
+  
+          <a-entity id="center-singlerep1"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 -25 0"
+            position="2.265 0.25 -2.6"
+            scale="0 0 0"
+            animation__green="
+              property: material.color; 
+              from: #F08445; 
+              to: #00FF00; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__red="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__yellow="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 0.6 0.6 0.6; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__shoot="
+              property: position; 
+              from: 2.265 0.25 -2.6; 
+              to: 2.6 1.4 -3; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false" 
+            animation__unpop="
+              property: scale; 
+              from: 0.6 0.6 0.6; 
+              to: 0 0 0; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="singlerep"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#agent-png;"
+              position="0 0 0.15"
+            >            
+            </a-entity>          
+          </a-entity>
+  
+          <a-entity id="center-singlerep2"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 -25 0"
+            position="-0.75 1.5 -1.5"
+            scale="0 0 0"
+            animation__green="
+              property: material.color; 
+              from: #F08445; 
+              to: #00FF00; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__red="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__yellow="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 0.6 0.6 0.6; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__shoot="
+              property: position; 
+              from: 2.265 0.25 -2.6; 
+              to: 2 1.4 -3.7; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false" 
+            animation__unpop="
+              property: scale; 
+              from: 0.6 0.6 0.6; 
+              to: 0 0 0; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="singlerep"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#agent-png;"
+              position="0 0 0.15"
+            >            
+            </a-entity>          
+          </a-entity>
+  
+          <a-entity id="center-singlerep3"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 -25 0"
+            position="-0.75 1.5 -1.5"
+            scale="0 0 0"
+            animation__green="
+              property: material.color; 
+              from: #F08445; 
+              to: #00FF00; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__red="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__yellow="
+              property: material.color; 
+              from: #F08445; 
+              to: #FF0000; 
+              dur: 500; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 0.6 0.6 0.6; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            animation__shoot="
+              property: position; 
+              from: 2.265 0.25 -2.6; 
+              to: 3.5 1.4 -2.7; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false" 
+            animation__unpop="
+              property: scale; 
+              from: 0.6 0.6 0.6; 
+              to: 0 0 0; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"   
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="singlerep"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#agent-png;"
+              position="0 0 0.15"
+            >            
+            </a-entity>          
+          </a-entity>
+  
+          <a-entity id="language-gate"
+            geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+            material="color:#F08445;"
+            position="2.25 0.25 -2.55"
+            rotation="0 -30 0"
+            scale="0 0 0"
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 1 1 1; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+  
+            >
+            <a-entity id="language-english"
+              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+              material="color:#fff; src:#languageus"
+              position="0 0 0.05"
+              rotation="0 0 0"
+              scale="0 0 0"
+              animation__popup="
+                property: scale; 
+                from: 0 0 0; 
+                to: 1 1 1; 
+                dur: 1000; 
+                easing: easeOutExpo; 
+                autoplay: false"  
+  
+              >
+            </a-entity>          
+  
+            <a-entity id="language-french"
+              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+              material="color:#fff; src:#languagefrench"
+              position="0 0 -0.05"
+              rotation="0 180 0"
+              >
+            </a-entity>          
+  
+            <a-entity id="language-spanish"
+              geometry="primitive:ring; radiusInner:0.3; radiusOuter:0.6"
+              material="color:#fff; src:#languagespanish"
+              position="0 0 0.05"
+              rotation="0 0 0"
+              visible="false"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: true; dur: 1; autoplay: false"            
+              >
+            </a-entity>          
+  
+          </a-entity>
+  
+          <a-entity id="center-aibot"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 62.5 0"
+            position="0.940 -1 -2.855"
+            animation__moveoff="
+                property: position; 
+                from: 0.940 -1 -2.855; 
+                to: 1 -1 -1.5; 
+                dur: 200; 
+                easing: easeInExpo; 
+                autoplay: false"       
+            animation__moveout="
+                property: position; 
+                from: 1 -1 -1.5; 
+                to: 0 0 -1; 
+                dur: 1500; 
+                easing: easeOutExpo; 
+                autoplay: false"       
+            animation__turn="
+                property: rotation; 
+                from: 0 62.5 0; 
+                to: 0 0 0; 
+                dur: 2000; 
+                easing: easeOutExpo; 
+                autoplay: false"    
+            animation__shiftover="
+                property: position; 
+                from: 1 -1 -1.5 ; 
+                to: 0.75 0.75 -1.25; 
+                dur: 1500; 
+                easing: easeOutExpo; 
+                autoplay: false"       
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="aibot"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#aibot-png;"
+              position="0 0 0"  
+              animation__popout="
+                  property: position; 
+                  from: 0 0 0; 
+                  to: 0 0 0.15; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                   
+            >            
+            </a-entity>
+          </a-entity>
+  
+  
+          <a-entity id="clients">
+            
+          </a-entity>
+  
+        </a-entity>
+      </a-entity>
+      <!-- END skills-demo -->
+  
+  
+  
+      <!-- issues-demo -->
+      <a-entity id="contactcenterissuesdemo" animation-timeline="timeline: #issuesDemoTimeline; startEvents: contactcenter-issues-demo-play"></a-entity>
+      <a-timeline id="issuesDemoTimeline">
+  <a-timeline-animation select="#product_ccenter" name="shiftout"></a-timeline-animation>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#issues-center-holder" name="show"></a-timeline-animation>
+              <a-timeline-animation select="#center-rep" name="turn" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#center-rep" name="moveoff" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#center-rep" name="moveout" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#rep" name="popout" offset="0"></a-timeline-animation>
+          </a-timeline-group>
+  
+          <a-timeline-group>
+              <a-timeline-animation select="#clientfunnel" name="popup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#c1" name="connect1" offset="500"></a-timeline-animation>
+              <a-timeline-animation select="#c5" name="appear" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#c5" name="connect1" offset="0"></a-timeline-animation>
+          </a-timeline-group>
+  
+          <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="appear" offset="1000"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="connect1" offset="1000"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="connect1" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="connect1" offset="0"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>    
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c1" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c1" name="connect1" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="appear" offset="1000"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="connect1" offset="1000"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="connect1" offset="500"></a-timeline-animation>
+          </a-timeline-group>        
+  
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c2" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>          
+            <a-timeline-animation select="#center-rep" name="shiftover" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#center-manager" name="popup" offset="0"></a-timeline-animation>
+          </a-timeline-group>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="appear" offset="1000"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="connect2" offset="1000"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c5" name="connect2" offset="500"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c5" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c5" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c3" name="connect2" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c4" name="connect2" offset="0"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-animation select="#c3" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c4" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c3" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c4" name="repos" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  
+          <a-timeline-group>
+            <a-timeline-animation select="#c6" name="appear" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+            <a-timeline-animation select="#c1" name="appear" offset="500"></a-timeline-animation>
+            <a-timeline-animation select="#c1" name="connect2" offset="500"></a-timeline-animation>
+          </a-timeline-group>        
+  
+          <a-timeline-animation select="#c1" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c1" name="repos" offset="0"></a-timeline-animation>
+        
+          <a-timeline-animation select="#c6" name="connect2" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="connectshift" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="connectshift2" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="disappear" offset="0"></a-timeline-animation>
+          <a-timeline-animation select="#c6" name="repos" offset="0"></a-timeline-animation>
+  
+  
+  <a-timeline-animation select="#issues-center-holder" name="hide" offset="4000"></a-timeline-animation>
+  <a-timeline-animation select="#product_ccenter" name="shiftback" offset="0"></a-timeline-animation>
+      </a-timeline>
+  
+      <a-entity id="contactcenterissuesdemohide" animation-timeline="timeline: #issuesDemoTimelineHide; startEvents: contactcenter-issues-demo-hide"></a-entity>
+      <a-timeline id="issuesDemoTimelineHide">
+          <a-timeline-group>
+              <a-timeline-animation select="#issues-center-holder" name="hide"></a-timeline-animation>
+          </a-timeline-group>
+      </a-timeline>
+  
+      <a-entity id="issues-demo" position="3 1 1.6" scale="1 1 1" rotation="0 60 0">
+  
+        <a-entity id="issues-center-holder"
+          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+          >
+  
+          <a-entity id="center-manager"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 0 0"
+            position="-0.75 1.5 -1.5"
+            scale="0 0 0"
+            animation__popup="
+              property: scale; 
+              from: 0 0 0; 
+              to: 1 1 1; 
+              dur: 1000; 
+              easing: easeOutExpo; 
+              autoplay: false"  
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="manager"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#manager-png;"
+              position="0 0 0.15"
+            >            
+            </a-entity>          
+          </a-entity>
+  
+          <a-entity id="center-rep"
+            geometry="primitive:box; width:1.22; height:1.22; depth:0.05;"
+            material="color:#F08445;"
+            rotation="0 62.5 0"
+            position="0.940 -1 -2.855"
+            animation__moveoff="
+                property: position; 
+                from: 0.940 -1 -2.855; 
+                to: 1 -1 -1.5; 
+                dur: 200; 
+                easing: easeInExpo; 
+                autoplay: false"       
+            animation__moveout="
+                property: position; 
+                from: 1 -1 -1.5; 
+                to: 0 0 -1; 
+                dur: 1500; 
+                easing: easeOutExpo; 
+                autoplay: false"       
+            animation__turn="
+                property: rotation; 
+                from: 0 62.5 0; 
+                to: 0 0 0; 
+                dur: 2000; 
+                easing: easeOutExpo; 
+                autoplay: false"    
+            animation__shiftover="
+                property: position; 
+                from: 0 0 -1; 
+                to: 0.75 0.75 -1.25; 
+                dur: 1500; 
+                easing: easeOutExpo; 
+                autoplay: false"       
+            >
+            <a-entity
+              geometry="primitive:cylinder; radius:0.380; height:0.075;"
+              material="color:#fff;"
+              rotation="90 0 0"
+            ></a-entity>      
+            <a-entity id="rep"
+              geometry="primitive:plane; width:1.22; height:1.22;"
+              material="color:#fff; transparent:true; src:#agents-png;"
+              position="0 0 0"  
+              animation__popout="
+                  property: position; 
+                  from: 0 0 0; 
+                  to: 0 0 0.15; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"                   
+            >            
+            </a-entity>
+          </a-entity>
+  
+          <a-entity id="clientfunnel"
+            geometry="primitive:cylinder; radius:0.5; height:2; openEnded:true; "
+            material="color:#333; side:double"
+            rotation="0 0 0"
+            position="0 -3 0"
+            scale="0 0 0"
+            animation__popup="
+                property: scale; 
+                from: 0 0 0; 
+                to: 1 1 1; 
+                dur: 1500; 
+                easing: easeOutExpo; 
+                autoplay: false"                 
+          ></a-entity> 
+  
+          <a-entity id="clients"
+          position="0 -1 0"
+          >
+            <a-sphere id="c1"
+              radius="0.1"
+              position="0.2 -1.2 0"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji1"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+  
+            <a-sphere id="c2"
+              radius="0.1"
+              position=" 0.1 -1 0"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji2"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: 0.1 -1 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+              animation__repos="property: position; to: 0.1 -1 0; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+  
+            <a-sphere id="c3"
+              radius="0.1"
+              position=" -0.1 -1 0.1"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji3"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: -0.1 -1 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+              animation__repos="property: position; to: -0.1 -1 0.1; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+   
+            <a-sphere id="c4"
+              radius="0.1"
+              position="0 -1 -0.2"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji4"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: 0 -1 -0.2; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay:: false"                 
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+   
+            <a-sphere id="c5"
+              radius="0.1"
+              position="0 -1.2 0.1"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji5"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: 0 -1.2 0.1; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+              animation__repos="property: position; to:0 -1.2 0.1; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+   
+  
+            <a-sphere id="c6"
+              radius="0.1"
+              position="0.2 -1.2 0"
+              scale="0 0 0"
+              color="#fff"
+              src="#emoji6"
+              animation__appear=" property: scale; from: 0 0 0; to: 1 1 0.4; dur: 200; easing: easeInOutExpo; autoplay: false"                             
+              animation__connect1=" property: position; from: 0.2 -1.2 0; to: 0 0.5 -1.2; dur: 3000; easing: linear; autoplay: false"                 
+              animation__connect2=" property: position; from: 0.2 -1.2 0; to: 0.8 1.4 -1.4; dur: 3000; easing: linear; autoplay: false"     
+  
+              animation__connectshift=" property: position; from: 0.4 2 -1.4; to: -0.7 2.5 -1.6; dur: 1000; easing: linear; autoplay: false"   
+              animation__connectshift2=" property: position; from: 0.2 -1.2 0; to: -0.7 2.5 -1.6; dur: 4500; easing: linear; autoplay: false"                 
+  
+              animation__repos="property: position; to:0.2 -1.2 0; dur: 1; autoplay: false"
+              animation__disappear=" property: scale; to: 0.001 0.001 0.001; dur: 1; easing: easeInOutExpo; autoplay: false"                             
+            ></a-sphere>  
+  
+  
+          </a-entity>
+  
+        </a-entity>
+  
+      </a-entity>
+      <!-- END issues-demo -->
+  
+  
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #contactcenterlabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity>        
+  <!-- END CONTACT CENTER --><!-- CRM -->
+  <a-entity id="crm"
+    position="-8 0 2.25"
+  >
+    <a-entity 
+      obj-model="obj: #crm-obj; mtl: #crm-mtl"
+      scale="1 1 1"
+      position="0 -0.5 0"
+      rotation="0 20 0"
+    ></a-entity>
+  
+    <!-- logos -->
+    <a-entity position="0 0 0">
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #dynamics-png" position="1.212 1.575 1.686" rotation="0 73.75 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #gsuite-png" position="1.490 1.575 1.055" rotation="0 79.35 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #office-png" position="1.640 1.575 0.396" rotation="0 86 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #salesforce-png" position="1.543 1.575 -0.354" rotation="0 110.75 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #oracle-png" position="1.213 1.575 -1.049" rotation="0 123 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #zendesk-png" position="0.691 1.575 -1.709" rotation="0 148 0">
+      </a-entity>
+      <a-entity geometry="primitive: plane; width:0.5; height:0.43" material="color:#fff; src: #clio-png" position="-0.056 1.575 -2.131" rotation="0 157.25 0">
+      </a-entity>
+    </a-entity>
+  
+    <!-- animation -->
+    <a-entity position="0 0 0"
+      animation="property: position; from: 0 0 0; to: 0 -0.2 0; dur: 1000; easing: linear; autoplay: true; loop:true"
+    >
+      <a-entity 
+        obj-model="obj: #crmdisc-obj; mtl: #crmdisc-mtl"
+        scale="1 1 1"
+        position="0 -0.2 0"
+      ></a-entity>
+      <a-entity 
+        obj-model="obj: #crmdisc-obj; mtl: #crmdisc-mtl"
+        scale="1 1 1"
+        position="0 -0.4 0"
+      ></a-entity>
+      <a-entity 
+        obj-model="obj: #crmdisc-obj; mtl: #crmdisc-mtl"
+        scale="1 1 1"
+        position="0 -0.6 0"
+      ></a-entity>
+      <a-entity mixin="crmdisc"
+        position="0 -0.35 0"
+        animation="property: material.opacity; from: 1; to: 0.5; dur: 1000; easing: linear; autoplay: true; loop:true"
+      ></a-entity>
+      <a-entity mixin="crmdisc"
+        material="opacity:0.5"
+        position="0 -0.55 0"
+        animation="property: material.opacity; from: 0.5; to: 0; dur: 1000; easing: linear; autoplay: true; loop:true"
+      ></a-entity>
+    </a-entity>
+    <!-- End animation -->
+  
+  </a-entity>
+  <!-- End CRM -->
+  
+  
+  
+  <a-entity position="-8 0.5 2.25">
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #crmintegrationslabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity><!-- BEGIN SMART WAN -->
+  <a-entity id="smartwan" position="3.15 0 -8.7" rotation="0 -20 0">
+      <a-entity 
+          obj-model="obj: #smartwan-obj; mtl: #smartwan-mtl"
+          scale="1.3 1.6 1.3"
+          position="0 0 0"
+          rotation="0 0 0"
+      ></a-entity>
+  
+      <!-- animation block -->
+      <a-entity id="smartwandemo" animation-timeline="timeline: #smartwanDemoTimeline; startEvents: smartwan-demo-play"></a-entity>
+      
+      <a-timeline id="smartwanDemoTimeline">
+  <!-- setup retail -->
+          <a-timeline-group>
+              <a-timeline-animation select="#product_smartwan" name="shiftout" offset="0"></a-timeline-animation>
+          </a-timeline-group>          
+  <!-- open -->  
+          <a-timeline-group>
+              <a-timeline-animation select="#smartwan-demo" name="zoomup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#smartwan-lid" name="openlid" offset="1500"></a-timeline-animation>
+          </a-timeline-group>          
+  <!-- close -->
+          <a-timeline-group>
+              <a-timeline-animation select="#smartwan-demo" name="zoomout" offset="4000"></a-timeline-animation>
+              <a-timeline-animation select="#smartwan-lid" name="closelid" offset="4500"></a-timeline-animation>
+          </a-timeline-group>          
+  <!-- cleanup -->
+          <a-timeline-group>
+              <a-timeline-animation select="#product_smartwan" name="shiftback" offset="0"></a-timeline-animation>
+          </a-timeline-group>          
+      </a-timeline>
+  
+      <a-entity id="smartwandemohide" animation-timeline="timeline: #smartwanDemoTimelineHide; startEvents: smartwan-demo-hide"></a-entity>
+      
+      <a-timeline id="smartwanDemoTimelineHide">
+          <a-timeline-animation select="#smartwan-demo" name="hide"></a-timeline-animation>
+      </a-timeline>
+  
+      <a-entity id="smartwan-demo"
+          position="0 0.882 0.635"
+          geometry="primitive:box; height: 0.5; width: 1.4; depth: 0.2"
+          material="color:#150068"
+          animation__zoomup="
+              property: position;
+              from: 0 0.882 0.635; 
+              to: 0.03 1.11 2.5; 
+              dur: 1500; 
+              easing: easeInOutQuad; 
+              autoplay: false"        
+          animation__zoomout="
+              property: position;
+              from: 0.03 1.11 2.5;
+              to: 0 0.882 0.635; 
+              dur: 500; 
+              autoplay: false"        
+          >        
+          <a-entity id="smartwan-inside"
+              geometry="primitive:plane; height: 0.5; width: 1.4;" 
+              material="color:#fff; src:#smartwan-box-int;"
+              position="0 0 0.11"
+          ></a-entity>
+  
+          <a-entity id="smartwan-lid"
+              position="0 -0.250 0.12"
+              rotation="0 0 0"
+              animation__openlid="
+                  property: rotation; 
+                  from: 0 0 0;
+                  to: 180 0 0; 
+                  dur: 1500; 
+                  easing: easeInOutQuad; 
+                  autoplay: false"
+              animation__closelid="
+                  property: rotation; 
+                  from: 180 0 0;
+                  to: 0 0 0; 
+                  dur: 500; 
+                  autoplay: false"
+              >   
+              <a-entity id="lidinside"
+                  geometry="primitive:plane; height: 0.5; width: 1.4;" 
+                  material="color:#fff; src:#smartwan-lid-int;"
+                  position="0 0.250 0"
+                  rotation="180 0 0"
+              ></a-entity>
+              <a-entity id="lidoutside"
+                  geometry="primitive:plane; height: 0.5; width: 1.4;" 
+                  material="shader:gif; src:#smartwan-lid-ext;"
+                  position="0 0.250 0"
+                  rotation="0 0 0"
+              ></a-entity>
+          </a-entity>
+      </a-entity>
+  
+      <!-- end animation block -->
+  
+  </a-entity>
+  <!-- END SMART WAN -->
+  
+  <a-entity position="3.15 0.5 -8.7">
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #smartwanlabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity><!-- BEGIN SIP TRUNKING -->
+  <a-entity id="sip-trunking" scale=".25 .25 .25" position="8 0.5 2.25" rotation="0 -100 0">
+      <a-entity position="-5 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -6 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -10 0" rotation="0 0 0"></a-entity>
+          </a-entity>
+      </a-entity>
+  
+      <!--     
+      fix animation__component delay issue and convert
+      <a-entity position="-3 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0"
+          animation="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0"
+          animation="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0"
+          animation="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0"
+          animation__color="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          animation__position="
+              property: position; to: 0 -6 0; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -11 0" rotation="0 0 0"
+          animation__color="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -13 0" rotation="0 0 0"
+          animation__color="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -15 0" rotation="0 0 0"
+          animation__color="
+              property: material.color; from: #0b8cc5; to: #fcc137; delay: 6000; dur: 200; easing: easeInOutQuad; dir: alternate; loop: true; autoplay: true"
+          >
+          </a-entity>
+      </a-entity> -->
+      <a-entity position="-3 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:6; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-animation attribute="position" dur="200" fill="forwards" direction="alternate" to="0 -6 0" delay="1500" repeat="indefinite"></a-animation>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -11 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -13 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -15 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="1500" repeat="indefinite"></a-animation>
+          </a-entity>
+      </a-entity>
+  
+      <a-entity position="-1 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:6; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-animation attribute="position" dur="200" fill="forwards" direction="alternate" to="0 -6 0" delay="2000" repeat="indefinite"></a-animation>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -11 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -13 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -15 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="2000" repeat="indefinite"></a-animation>
+          </a-entity>
+      </a-entity>
+      <a-entity position="1 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-animation attribute="position" dur="200" fill="forwards" direction="alternate" to="0 -6 0" delay="3500" repeat="indefinite"></a-animation>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -11 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -13 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -15 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="3500" repeat="indefinite"></a-animation>
+          </a-entity>
+      </a-entity>
+      <a-entity position="3 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-animation attribute="position" dur="200" fill="forwards" direction="alternate" to="0 -6 0" delay="6500" repeat="indefinite"></a-animation>
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -11 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -13 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -15 0" rotation="0 0 0">
+              <a-animation attribute="material.color" dur="200" fill="forwards" direction="alternate" from="#0b8cc5" to="#fcc137" delay="6500" repeat="indefinite"></a-animation>
+          </a-entity>
+      </a-entity>
+      <a-entity position="5 0 0">
+          <a-entity geometry="primitive:torus; arc:180; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -8" rotation="0 90 0">
+          </a-entity>
+          <a-entity geometry="primitive:torus; arc:90; radius:8; radius-tubular:0.15;" mixin="blue01" position="0 0 -24" rotation="180 -90 0">
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" position="0 -8 -26" rotation="90 0 0">
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -4 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:4; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -12 0" rotation="0 0 0"></a-entity>
+          </a-entity>
+          <a-entity geometry="primitive:cylinder; height:10; radius:0.3;" mixin="blue01" position="0 -5 0" rotation="0 0 0">
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.5" position="0 -6 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.25" position="0 -8 0" rotation="0 0 0"></a-entity>
+              <a-entity geometry="primitive:cylinder; height:2; radius:0.3;" mixin="blue01" material="opacity:0.125" position="0 -10 0" rotation="0 0 0"></a-entity>
+          </a-entity>
+      </a-entity>
+  </a-entity>
+  <!-- END SIP TRUNKING -->
+  
+  
+  
+  
+  <a-entity position="8 0.5 2.25">
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #siptrunkinglabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity><!-- BEGIN REACH  rotation="10 -50 0" -->
+  <a-entity id="reach" position="7.4 0.5 -4.3" rotation="0 0 0">
+      <a-entity id="donut">
+  	    <a-entity 
+  	        obj-model="obj: #reach-obj; mtl: #reach-mtl"
+  	        scale="0.375 0.375 0.375"
+  	        position="0 -0.3 0"
+  	        rotation="0 0 0"
+  	    ></a-entity> 
+  	    <a-entity 
+  	        obj-model="obj: #reachslice-obj; mtl: #reachslice-mtl"
+  	        scale="0.375 0.375 0.375"
+  	        position="0 0 0"
+  	        rotation="0 -81 0"
+  	    ></a-entity>
+  	    <a-entity 
+  	        obj-model="obj: #reachslice-obj; mtl: #reachslice-mtl"
+  	        scale="0.375 0.375 0.375"
+  	        position="0 0 0"
+  	        rotation="0 81 0"
+  	    ></a-entity>
+  	    <a-entity id="demo-slice"
+  	        obj-model="obj: #reachslice-obj; mtl: #reachslice-mtl"
+  	        scale="0.375 0.375 0.375"
+  	        position="0 0 0"
+  	        rotation="0 20 0"
+  	        visible="false"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"			        
+  	    ></a-entity>
+  	</a-entity>
+  
+  	<!-- init-reach -->
+  	<a-entity id="init-reach">
+  
+  		<a-entity id="mainphone"
+  			obj-model="obj: #phone-obj; mtl: #phone-mtl"
+  			scale="0.75 0.75 0.75" 
+  			position="-1.85 0.3 -0.7" 
+  			rotation="0 240 0"
+  		>
+  			<a-entity id="blank-screen"
+  	            geometry="primitive:plane; height: 0.790; width: 0.45;"
+  	            material="color:#fff;"
+  	            position="1.240 0.040 0"
+  	            rotation="0 90 0"
+  	            visible="false"
+  	            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+  	            animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+  				>
+  				<a-entity id="send-text"
+  		            geometry="primitive:plane; height: 0.35; width: 0.35;"
+                      material="color:#fff; transparent:true; opacity:1; src:#reach-send"
+  		            position="0 0 0.01"
+  		            scale="0 0 0"
+                      animation__write="
+                          property: scale; 
+                          from: 1 0 0; 
+                          to: 1 1 1; 
+                          dur: 500; 
+                          easing: easeInQuad; 
+                          autoplay: false"  
+                      animation__send="
+                          property: scale; 
+                          from: 1 1 1; 
+                          to: 0 0 0; 
+                          dur: 500; 
+                          easing: easeOutQuad; 
+                          autoplay: false"  		            
+  				></a-entity>
+  
+  				<a-entity id="receive-retail"
+  		            geometry="primitive:plane; height: 0.35; width: 0.35;"
+                      material="color:#fff; transparent:true; opacity:0; src:#reach-receive-shoe"
+  		            position="0 0 -0.01"
+                      animation__popup="
+                          property: position; 
+                          from: 0 0 -0.01; 
+                          to: 0 0 0.15; 
+                          dur: 500; 
+                          easing: easeOutElastic; 
+                          autoplay: false"  
+                      animation__fadein="
+                          property: material.opacity; 
+                          from: 0; 
+                          to: 1; 
+                          dur: 200; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  
+                      animation__fadeout="
+                          property: material.opacity; 
+                          from: 1; 
+                          to: 0; 
+                          dur: 500; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  		            
+  				></a-entity>
+  
+  				<a-entity id="receive-realestate"
+  		            geometry="primitive:plane; height: 0.35; width: 0.35;"
+                      material="color:#fff; transparent:true; opacity:0; src:#reach-receive-house"
+  		            position="0 0 -0.01"
+                      animation__popup="
+                          property: position; 
+                          from: 0 0 -0.01; 
+                          to: 0 0 0.15; 
+                          dur: 500; 
+                          easing: easeOutElastic; 
+                          autoplay: false"  
+                      animation__fadein="
+                          property: material.opacity; 
+                          from: 0; 
+                          to: 1; 
+                          dur: 200; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  
+                      animation__fadeout="
+                          property: material.opacity; 
+                          from: 1; 
+                          to: 0; 
+                          dur: 500; 
+                          easing: easeInOutQuad; 
+                          autoplay: false"  		            
+  				></a-entity>
+  			</a-entity>
+  		</a-entity>
+  
+  	    <a-entity id="init-data-main"
+  	    	geometry="primitive:sphere; radius:0.1;"
+  	    	material="color:#DE7A4C;"
+  	    	position="-2.15 0.3 0"
+  			animation__travel="
+  				property: position; 
+  				to: -0.85 0 0; 
+  				delay: 0; 
+  				dur: 1000; 
+  				easing: easeInOutQuad; 
+  				dir: alternate; 
+  				loop: true; 
+  				autoplay: true"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"		
+      		>
+      		<!-- replace a-animation with component -->
+  			<a-animation id="switch"
+  				attribute="material.color" 
+  				from="#DE7A4C" 
+  				to="#4F33AB"
+  				delay="1000" 
+  				dur="0" 
+  				fill="forwards" 
+  				direction="alternate" 
+  				repeat="indefinite"
+  			></a-animation>    	
+      	</a-entity>
+  
+  		<a-entity id="demo-data-main"
+  			visible="false"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"		
+              >
+  		    <a-entity id="data-send"
+  		    	geometry="primitive:sphere; radius:0.1;"
+  		    	material="color:#4F33AB;"
+  		    	position="-2.15 0.3 0"
+  				animation__travel="
+  					property: position; 
+  					from: -2.15 0.3 0; 
+  					to: -0.85 0 0; 
+  					delay: 0; 
+  					dur: 1000; 
+  					easing: easeInOutQuad; 
+  					autoplay: false"
+  	    	>
+  	    	</a-entity>
+  		    <a-entity id="data-receive"
+  		    	geometry="primitive:sphere; radius:0.1;"
+  		    	material="color:#DE7A4C;"
+  		    	position="-0.85 0 0"
+  				animation__travel="
+  					property: position; 
+  					from: -0.85 0 0;
+  					to: -2.15 0.3 0; 
+  					delay: 0; 
+  					dur: 1000; 
+  					easing: easeInOutQuad; 
+  					autoplay: false"
+  	    	>
+  	    	</a-entity>			
+  		    <a-entity id="data-share"
+  		    	geometry="primitive:sphere; radius:0.1;"
+  		    	material="color:#DE7A4C;"
+  		    	position="0.2 0 0.8"
+  		    	visible="false"
+  				animation__travel="
+  					property: position; 
+  					from: 0.2 0 0.8;
+  					to: 1 0.5 2.5; 
+  					delay: 0; 
+  					dur: 1000; 
+  					easing: easeInOutQuad; 
+  					autoplay: false"
+  	            animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+  	            animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"		
+  	    	>
+  	    	</a-entity>			
+  		</a-entity>
+  
+  
+  
+  	    <a-entity id="phonegroup" 
+  	    	position="2 0 1"
+  	    	>
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.625 0.853 -0.450" 
+  				rotation="0 -90 0"
+  			></a-entity>
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.715 0.719 -0.31" 
+  				rotation="0 -90 0"
+  			></a-entity>
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.834 0.844 -0.18" 
+  				rotation="0 -90 0"
+  			></a-entity>
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.750 0.992 0.074" 
+  				rotation="0 -90 0"
+  			></a-entity>    	
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.478 0.673 -0.12" 
+  				rotation="0 -90 0"
+  			></a-entity>    	
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.559 0.694 0.170" 
+  				rotation="0 -90 0"
+  			></a-entity>       	
+  			<a-entity 
+  				mixin="flatphone"
+  				position="0.649 0.800 0.309" 
+  				rotation="0 -90 0"
+  			></a-entity>    	
+  	    </a-entity>
+  		<a-entity id="init-datagroup"
+              animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+              animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"		
+  		>
+  		    <a-sphere
+  		    	radius="0.08"
+  		    	opacity="1"
+  		    	color="#DE7A4C"
+  		    	position="0.844 0 0.282"
+  				animation__travel="
+  					property: position; 
+  					to: 2.698 0.765 0.899; 
+  					delay: 500; 
+  					dur: 2000; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  				animation__fade="
+  					property: material.opacity; 
+  					from: 1; 
+  					to: 0.2; 
+  					delay: 500; 
+  					dur: 2000; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  		    >   
+  		    </a-sphere>
+  		    <a-sphere
+  		    	radius="0.08"
+  		    	opacity="1"
+  		    	color="#DE7A4C"
+  		    	position="0.844 0 0.282"
+  				animation__travel="
+  					property: position; 
+  					to: 2.698 0.765 0.899; 
+  					delay: 700; 
+  					dur: 1800; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  				animation__fade="
+  					property: material.opacity; 
+  					from: 1; 
+  					to: 0.2; 
+  					delay: 700; 
+  					dur: 1800; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  		    >    
+  		    </a-sphere>
+  		    <a-sphere
+  		    	radius="0.08"
+  		    	opacity="1"
+  		    	color="#DE7A4C"
+  		    	position="0.844 0 0.282"
+  				animation__travel="
+  					property: position; 
+  					to: 2.698 0.765 0.899; 
+  					delay: 900; 
+  					dur: 1600; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  				animation__fade="
+  					property: material.opacity; 
+  					from: 1; 
+  					to: 0.2; 
+  					delay: 900; 
+  					dur: 1600; 
+  					easing: easeInOutQuad; 
+  					loop: true; 
+  					autoplay: true"
+  		    >    
+  		    </a-sphere>
+  		</a-entity>
+  	</a-entity>
+  	<!-- END init-reach -->
+  
+  
+      <!-- animation block -->
+  
+      <a-entity id="reachretaildemo" animation-timeline="timeline: #retailDemoTimeline; startEvents: reach-retail-demo-play"></a-entity>
+  
+      <a-timeline id="retailDemoTimeline">
+  <!-- setup retail -->
+          <a-timeline-group>            
+  			<a-timeline-animation select="#product_reach" name="shiftout" offset="0"></a-timeline-animation>
+  
+  			<a-timeline-animation select="#demo-slice" name="show" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#retail-demo" name="show" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#blank-screen" name="show" offset="0"></a-timeline-animation> 
+  			<a-timeline-animation select="#init-data-main" name="hide" offset="0"></a-timeline-animation> 
+  			<a-timeline-animation select="#demo-data-main" name="show" offset="0"></a-timeline-animation> 
+          </a-timeline-group>            
+  
+  <!-- show shoe -->
+          <a-timeline-group>            
+              <a-timeline-animation select="#shoe" name="scaleup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#store" name="scaleup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#reachshoe" name="moveout" offset="1500"></a-timeline-animation>
+              <a-timeline-animation select="#reachshoe" name="scaleup" offset="1500"></a-timeline-animation>
+          </a-timeline-group>            
+           
+  <!-- send text and receive data -->
+          <a-timeline-group>            
+           	<a-timeline-animation select="#reachshoe" name="rotate" offset="0"></a-timeline-animation>
+           	<a-timeline-animation select="#send-text" name="write" offset="1000"></a-timeline-animation>
+           	<a-timeline-animation select="#send-text" name="send" offset="2500"></a-timeline-animation>
+           	<a-timeline-animation select="#data-send" name="travel" offset="2500"></a-timeline-animation>
+  
+           	<a-timeline-animation select="#data-receive" name="travel" offset="4700"></a-timeline-animation>
+           	<a-timeline-animation select="#receive-retail" name="popup" offset="5000"></a-timeline-animation>     
+           	<a-timeline-animation select="#receive-retail" name="fadein" offset="5000"></a-timeline-animation>
+  
+           	<a-timeline-animation select="#data-share" name="show" offset="0"></a-timeline-animation>
+           	<a-timeline-animation select="#data-share" name="travel" offset="4700"></a-timeline-animation>
+           	<a-timeline-animation select="#data-sheet-shoe" name="popup" offset="5700"></a-timeline-animation>
+          </a-timeline-group>            
+  
+  <!-- hide shoe -->
+          <a-timeline-group> 
+           	<a-timeline-animation select="#data-share" name="hide" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#shoe" name="scaledown" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#store" name="scaledown" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#reachshoe" name="scaledown" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#receive-retail" name="fadeout" offset="0"></a-timeline-animation>	
+          </a-timeline-group>            
+  
+  <!-- cleanup retail -->
+          <a-timeline-group>             
+  			<a-timeline-animation select="#blank-screen" name="hide"></a-timeline-animation> 
+  			<a-timeline-animation select="#demo-data-main" name="hide"></a-timeline-animation> 
+  			<a-timeline-animation select="#retail-demo" name="hide"></a-timeline-animation>
+  			<a-timeline-animation select="#demo-slice" name="hide" offset="0"></a-timeline-animation>
+  
+  			<a-timeline-animation select="#init-data-main" name="show"></a-timeline-animation> 
+  			<a-timeline-animation select="#product_reach" name="shiftback" offset="2000"></a-timeline-animation>
+          </a-timeline-group>            
+  
+      </a-timeline>
+  
+  	<!-- retail-demo -->
+  	<a-entity id="retail-demo"
+  		visible="false"
+          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+  	>
+  
+  		<a-entity id="reachshoe"
+  			position="0 0 0"
+  			rotation="0 0 0"
+  			scale="0 0 0"
+              animation__moveout="
+                  property: position; 
+                  from: 0 0 0; 
+                  to: 0 0.5 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"        
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__rotate="
+                  property: rotation; 
+                  from: 0 0 0; 
+                  to: 0 1440 0; 
+                  dur: 10000; 
+                  easing: linear;
+                  autoplay: false"       
+     			>
+  			<a-entity 
+  				obj-model="obj: #shoe2-obj;"
+  				material="color:#DE7A4C;"
+  				scale="0.8 0.8 0.8" 
+  				position="0 0 0" 
+  				rotation="0 0 0"
+  			></a-entity>
+  		</a-entity>
+  
+  		<a-entity id="shoe"
+  			position="-2 0.5 -1"
+  			rotation="0 -20 0"
+  			scale="0 0 0"
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+  			>
+  			<a-entity 
+  				obj-model="obj: #shoe-obj; mtl: #shoe-mtl"
+  				scale="1 1 1" 
+  				position="-0.3 -0.5 0" 
+  				rotation="0 -70 0"
+  			></a-entity>
+  
+  			<a-entity 
+  				geometry="
+  					primitive:plane;
+  					width:0.8;
+  					height:0.8;
+  					"
+  				material="
+  					color:#fff; transparent:true; src:#reach-sign-shoe;
+  					"
+  				position="-0.2 0.4 0"
+  				rotation="0 0 0"
+  			></a-entity>
+  		</a-entity>
+  
+  		<a-entity id="store"
+  			position="1 0 2.5"
+  			rotation="0 0 0"
+  			scale="0 0 0"
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false"
+     			>
+  			<a-entity 
+  				obj-model="obj: #building-retail-obj; mtl: #building-retail-mtl"
+  				scale="0.8 1.3 1.6" 
+  				position="0 0 0" 
+  				rotation="0 75 0"
+  			></a-entity>
+  			<a-entity id="data-sheet-shoe"
+  				geometry="
+  					primitive:plane;
+  					width:0.65;
+  					height:0.65;
+  					"
+  				material="
+  					color:#fff; transparent:true; src:#reach-retail-data"
+  				position="-0.7 0.3 0"
+  				rotation="0 -90 0"
+  				scale="0 0 0"
+                  animation__popup="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 500; 
+                      easing: easeOutElastic; 
+                      autoplay: false"  
+  			></a-entity>
+  		</a-entity>
+  
+  	</a-entity>
+  	<!-- END retail-demo -->
+  
+      <a-entity id="reachrealestatedemo" animation-timeline="timeline: #realestateDemoTimeline; startEvents: reach-realestate-demo-play"></a-entity>
+  
+      <a-timeline id="realestateDemoTimeline">
+  <!-- setup realestate -->
+          <a-timeline-group>            
+  			<a-timeline-animation select="#product_reach" name="shiftout" offset="0"></a-timeline-animation>
+  
+  			<a-timeline-animation select="#demo-slice" name="show" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#realestate-demo" name="show" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#blank-screen" name="show" offset="0"></a-timeline-animation> 
+  			<a-timeline-animation select="#init-data-main" name="hide" offset="0"></a-timeline-animation> 
+  			<a-timeline-animation select="#demo-data-main" name="show" offset="0"></a-timeline-animation> 
+          </a-timeline-group>            
+  
+  <!-- show house -->
+          <a-timeline-group>            
+              <a-timeline-animation select="#house" name="scaleup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#agency" name="scaleup" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#reachhouse" name="moveout" offset="1500"></a-timeline-animation>
+              <a-timeline-animation select="#reachhouse" name="scaleup" offset="1500"></a-timeline-animation>
+          </a-timeline-group>           
+  
+  <!-- send text and receive data -->
+          <a-timeline-group>            
+           	<a-timeline-animation select="#reachhouse" name="rotate" offset="0"></a-timeline-animation>
+           	<a-timeline-animation select="#send-text" name="write" offset="1000"></a-timeline-animation>
+           	<a-timeline-animation select="#send-text" name="send" offset="2500"></a-timeline-animation>
+           	<a-timeline-animation select="#data-send" name="travel" offset="2500"></a-timeline-animation>
+  
+           	<a-timeline-animation select="#data-receive" name="travel" offset="4700"></a-timeline-animation>
+           	<a-timeline-animation select="#receive-realestate" name="popup" offset="5000"></a-timeline-animation>     
+           	<a-timeline-animation select="#receive-realestate" name="fadein" offset="5000"></a-timeline-animation>
+  
+           	<a-timeline-animation select="#data-share" name="show" offset="0"></a-timeline-animation>
+           	<a-timeline-animation select="#data-share" name="travel" offset="4700"></a-timeline-animation>
+           	<a-timeline-animation select="#data-sheet-house" name="popup" offset="5700"></a-timeline-animation>
+          </a-timeline-group>     
+  
+  <!-- hide house -->
+          <a-timeline-group> 
+           	<a-timeline-animation select="#data-share" name="hide" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#house" name="scaledown" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#agency" name="scaledown" offset="0"></a-timeline-animation>
+              <a-timeline-animation select="#reachhouse" name="scaledown" offset="0"></a-timeline-animation>
+  			<a-timeline-animation select="#receive-realestate" name="fadeout" offset="0"></a-timeline-animation>	
+          </a-timeline-group>       
+  
+  <!-- cleanup realestate -->
+          <a-timeline-group>             
+  			<a-timeline-animation select="#blank-screen" name="hide"></a-timeline-animation> 
+  			<a-timeline-animation select="#demo-data-main" name="hide"></a-timeline-animation> 
+  			<a-timeline-animation select="#realestate-demo" name="hide"></a-timeline-animation>
+  			<a-timeline-animation select="#demo-slice" name="hide" offset="0"></a-timeline-animation>
+  
+  			<a-timeline-animation select="#init-data-main" name="show"></a-timeline-animation> 
+  			<a-timeline-animation select="#product_reach" name="shiftback" offset="2000"></a-timeline-animation>
+          </a-timeline-group>      
+  
+      </a-timeline>
+  
+     	<!-- realestate-demo -->
+  	<a-entity id="realestate-demo"
+  		visible="false"
+          animation__show="property: visible; from: false; to: true; dur: 1; autoplay: false"
+          animation__hide="property: visible; from: true; to: false; dur: 1; autoplay: false"
+  	>
+  
+  		<a-entity id="reachhouse"
+  			position="0 0 0"
+  			rotation="0 0 0"
+  			scale="0 0 0"
+              animation__moveout="
+                  property: position; 
+                  from: 0 0 0; 
+                  to: 0 0.4 0; 
+                  dur: 1000; 
+                  easing: easeOutExpo; 
+                  autoplay: false"        
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__rotate="
+                  property: rotation; 
+                  from: 0 0 0; 
+                  to: 0 1440 0; 
+                  dur: 10000; 
+                  easing: linear;
+                  autoplay: false"       
+     			>
+  			<a-entity 
+  				obj-model="obj: #house2-obj;"
+  				material="color:#DE7A4C;"
+  				scale="0.8 0.8 0.8" 
+  				position="0 0 0" 
+  				rotation="0 0 0"
+  			></a-entity>
+  		</a-entity>
+  
+  		<a-entity id="house"
+  			position="-2 0.5 -1"
+  			rotation="0 -20 0"
+  			scale="0 0 0"
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false"
+     			>
+  			<a-entity 
+  				obj-model="obj: #house-obj; mtl: #house-mtl"
+  				scale="1.5 1.5 1.5" 
+  				position="0 -0.5 0" 
+  				rotation="0 0 0"
+  			></a-entity>
+  
+  			<a-entity 
+  				geometry="
+  					primitive:plane;
+  					width:0.65;
+  					height:0.65;
+  					"
+  				material="
+  					color:#fff; transparent:true; src:#reach-sign-house"
+  				position="-0.4 -0.1 0.8"
+  				rotation="0 0 0"
+  			></a-entity>
+  		</a-entity>
+  
+  		<a-entity id="agency"
+  			position="1 0 2.5"
+  			rotation="0 0 0"
+  			scale="0 0 0"
+              animation__scaleup="
+                  property: scale; 
+                  from: 0 0 0; 
+                  to: 1 1 1; 
+                  dur: 2000; 
+                  easing: easeOutExpo; 
+                  autoplay: false" 			
+              animation__scaledown="
+                  property: scale; 
+                  from: 1 1 1; 
+                  to: 0 0 0; 
+                  dur: 500; 
+                  easing: easeOutExpo; 
+                  autoplay: false"
+     			>
+  			<a-entity 
+  				obj-model="obj: #building-realestate-obj; mtl: #building-realestate-mtl"
+  				scale="0.8 1.3 1.6" 
+  				position="0 0 0" 
+  				rotation="0 75 0"
+  			></a-entity>
+  			<a-entity id="data-sheet-house"
+  				geometry="
+  					primitive:plane;
+  					width:0.65;
+  					height:0.65;
+  					"
+  				material="
+  					color:#fff; transparent:true; src:#reach-realestate-data"
+  				position="-0.7 0.3 0"
+  				rotation="0 -90 0"
+  				scale="0 0 0"
+                  animation__popup="
+                      property: scale; 
+                      from: 0 0 0; 
+                      to: 1 1 1; 
+                      dur: 500; 
+                      easing: easeOutElastic; 
+                      autoplay: false"  
+  			></a-entity>
+  		</a-entity>
+  
+  
+  	</a-entity>
+  	<!-- END realestate-demo -->
+  
+  
+  </a-entity>
+  <!-- END REACH -->
+  
+  <a-entity position="7.4 0.5 -4.3">
+      <!-- LABEL -->
+      <a-entity lookatlabel mixin="modellabel" material="src: #vonagereachlabel"
+      ></a-entity>
+      <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
+      <!-- end LABEL -->
+  </a-entity><!-- start ucaas-->
+  <a-entity id="sky"  
+    obj-model="obj: #ucaascpaas-obj; mtl: #ucaascpaas-mtl"
+    scale="1 1 1"
+    position="0 0 0"
+    rotation="0 0 0"
+  ></a-entity>
+  <!-- end ucaas--><a-entity trunk
+  		  class="clickable"  
+   		  position="0 0.48 4.25" 
+   		  rotation="0 180 0"
+   		  >
+  </a-entity>
+  <!-- Checkpoint Initial Posisiton -->
+  <a-entity checkpoint position="0 0 2.75">
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+  </a-entity>
+  
+  
+    <!-- Intro -->
+    <a-entity 
+      position="0 1.5 2.75"
+      rotation="0 0 0" 
+      >
+      <a-curvedimage id="intro-screen-gearvr"
+        class="clickable"
+        src="#intro-gearvr" height="1" radius="1.5" theta-start="145" theta-length="70"
+        rotation="0 0 0"
+        scale="1 1 1"
+        animation__startbounce="
+            property: scale; 
+            from: 1 1 1; 
+            to: 0 0 0; 
+            delay: 0; 
+            dur: 500; 
+            easing: easeInOutQuad; 
+            startEvents: click;
+            autoplay: false"          
+      ></a-curvedimage>
+    </a-entity>
+    <!-- End Intro -->
+  
+  
+  
+  </a-entity>
+  <!-- End Checkpoint Initial Posisiton --><!-- Checkpoint Video UCaaS CPaaS-->
+  <a-entity lookatlabel 
+            position="0 6 0" 
+            rotation="0 0 0"  
+            geometry="primitive:box; width:1; depth1; height:1"
+            material="color:#fff; opacity:0;"
+    >
+  
+    <!-- LABEL -->
+    <a-entity 
+      position="0 0.3 1" 
+      rotation="60 0 0"
+      scale="2 2 2"
+      geometry="primitive:plane; height:0.25; width:1;"
+      material="color:#fff; transparent:true; src: #ucaascpaaslabel"
+    ></a-entity>
+  
+    <a-entity rotation="150 0 0">
+      <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    </a-entity>
+    
+    <a-entity ui-console="product:ucaas; rig:#cameraRig; triggered:true"
+      visible="false"
+      position="0 0 0"
+      rotation="0 0 0"
+      video-controls="videoSrcURL: #avid_ucaas;" 
+      class="clickable"   
+    >
+      <a-video  id="avid_ucaas" 
+                src="#ucaas_video" 
+                width="2.84" 
+                height="1.60"
+                position="0 -2.25 0.75"
+                rotation="40 0 0"
+                scale="1 1 1"
+                watching-video 
+                class="clickable"   
+      >    
+      </a-video>
+      <a-entity panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarkucaas;
+          toggle:true
+        "
+        position="0 -2.974 0.154"
+        rotation="40 0 0"
+        scale="2 2 2"
+      >      
+      </a-entity>
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint Video SIP Trunking-->
+  <a-entity checkpoint position="3.75 0 0.75" rotation="0 -105 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_sip"  
+      ui-console="product:sip; radius:0.75; rig:#cameraRig;"
+      visible="true"
+      position="0 0 0"
+      rotation="0 -5 0"
+      video-controls="videoSrcURL: #avid_sip;"  
+    >
+      <a-video  id="avid_sip" 
+                src="#sip_video" 
+                width="2.84" 
+                height="1.60"
+                position="0 2.3 -1.45"
+                rotation="16 0 0"
+                scale="0.6 0.6 0.6"
+                watching-video 
+      >    
+      </a-video>
+      <a-entity panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarksip;
+          toggle:true
+        "
+        position="0 1.725 -1.25"
+      >      
+      </a-entity>
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint Video CRM Integrations-->
+  <a-entity checkpoint position="-3.75 0 0.75" rotation="0 105 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_crm"  
+      ui-console="product:crm; radius:0.75; rig:#cameraRig;"
+      visible="false"
+      position="0 0 0"
+      rotation="0 5 0"
+      video-controls="videoSrcURL: #avid_crm;"
+    >
+      <a-video  id="avid_crm" 
+                src="#crm_video" 
+                width="2.84" 
+                height="1.60"
+                position="0 2.3 -1.45"
+                rotation="17 0 0"
+                scale="0.6 0.6 0.6"
+                watching-video 
+      >    
+      </a-video>
+      <a-entity panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarkcrm;
+          toggle:true
+        "
+        position="0 1.725 -1.25"
+      >      
+      </a-entity>
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint UI Amazon Chime-->
+  <a-entity checkpoint position="-1.25 0 -3.5" rotation="0 20 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_chime"
+      ui-console="product:chime; radius:0.75; rig:#cameraRig;"
+      visible="false"
+      position="0 0 0"
+      rotation="0 0 0"
+      animation__shiftout="
+        property: rotation; 
+        from: 0 0 0; 
+        to: 0 60 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+      animation__shiftback="
+        property: rotation; 
+        from: 0 60 0; 
+        to: 0 0 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+    >
+      <a-entity panel="copy:#panel-chime"
+        position="0 1.765 -1.25"
+      >      
+      </a-entity>
+      <a-entity panelbtn="
+          label:#panel-chime-btn-label-2; 
+          clickAction:demochime2;
+        "
+        position="0 1.425 -1.25"
+      >      
+      </a-entity>
+  
+      <a-entity  panelbtn="
+          label:#panel-chime-btn-label-1; 
+          clickAction:demochime1;
+        "
+        position="0 1.275 -1.25"
+      >      
+      </a-entity>    
+      <a-entity  panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarkchime;
+          toggle:true
+        "
+        position="0 1.125 -1.25"
+      >      
+      </a-entity>    
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint UI Contact Center-->
+  <a-entity checkpoint position="-3.25 0 -1.9" rotation="0 62 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_ccenter"
+      ui-console="product:ccenter; radius:0.75; rig:#cameraRig;"
+      visible="false"
+      position="0 0 0"
+      rotation="0 0 0"
+      animation__shiftout="
+        property: rotation; 
+        from: 0 0 0; 
+        to: 0 60 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+      animation__shiftback="
+        property: rotation; 
+        from: 0 60 0; 
+        to: 0 0 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+    >
+      <a-entity panel="copy:#panel-contactcenter"
+        position="0 1.765 -1.25"
+      >      
+      </a-entity>
+      <a-entity panelbtn="
+          label:#panel-contactcenter-btn-label-1; 
+          clickAction:democontactcenter1;
+        "
+        position="0 1.425 -1.25"
+      >      
+      </a-entity>
+  
+      <a-entity  panelbtn="
+          label:#panel-contactcenter-btn-label-2; 
+          clickAction:democontactcenter2;
+        "
+        position="0 1.275 -1.25"
+      >      
+      </a-entity>    
+      <a-entity  panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarkcontactcenter;
+          toggle:true
+        "
+        position="0 1.125 -1.25"
+      >      
+      </a-entity>    
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint UI Smartwan-->
+  <a-entity checkpoint position="1.25 0 -3.5" rotation="0 -20 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_smartwan"  
+      ui-console="product:smartwan; radius:0.75; rig:#cameraRig;"
+      visible="false"
+      position="0 0 0"
+      rotation="0 0 0"
+      animation__shiftout="
+        property: rotation; 
+        from: 0 0 0; 
+        to: 0 50 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+      animation__shiftback="
+        property: rotation; 
+        from: 0 50 0; 
+        to: 0 0 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+    >
+      <a-entity panel="copy:#panel-smartwan"
+        position="0 1.765 -1.25"
+      >      
+      </a-entity>
+      <a-entity panelbtn="
+          label:#panel-smartwan-btn-label; 
+          clickAction:demosmartwan;
+        "
+        position="0 1.425 -1.25"
+      >      
+      </a-entity>
+  
+      <a-entity  panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarksmartwan;
+          toggle:true
+        "
+        position="0 1.275 -1.25"
+      >      
+      </a-entity>    
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI --><!-- Checkpoint UI Vonage Reach-->
+  <a-entity checkpoint position="3.25 0 -1.9" rotation="0 -62 0" >
+    <a-entity checkpointspot="rayobj:clickable"></a-entity>
+    <a-entity class="clickable"
+      id="product_reach"  
+      ui-console="product:reach; radius:0.75; rig:#cameraRig;"
+      visible="false"
+      position="0 0 0"
+      rotation="0 0 0"
+      animation__shiftout="
+        property: rotation; 
+        from: 0 0 0; 
+        to: 0 60 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+      animation__shiftback="
+        property: rotation; 
+        from: 0 60 0; 
+        to: 0 0 0; 
+        dur: 500; 
+        easing: easeInOutQuad; 
+        autoplay: false"
+    >
+      <a-entity panel="copy:#panel-vonagereach"
+        position="0 1.765 -1.25"
+      >      
+      </a-entity>
+      <a-entity panelbtn="
+          label:#panel-vonagereach-btn-label-1; 
+          clickAction:demovonagereach1;
+        "
+        position="0 1.425 -1.25"
+      >      
+      </a-entity>
+  
+      <a-entity  panelbtn="
+          label:#panel-vonagereach-btn-label-2; 
+          clickAction:demovonagereach2;
+        "
+        position="0 1.275 -1.25"
+      >      
+      </a-entity>    
+      <a-entity  panelbtn="
+          label:#bookmark-btn-label; 
+          clickAction:bookmarkvonagereach;
+          toggle:true
+        "
+        position="0 1.125 -1.25"
+      >      
+      </a-entity>    
+    </a-entity>
+    <!-- End UI Console -->
+  
+  </a-entity>
+  <!-- End Checkpoint UI -->
+  <a-entity id="cameraRig" 
+  		  position="0 0 3">
+  	<a-entity id="head" 
+  			  camera 
+  			  wasd-controls 
+  			  look-controls
+  	></a-entity>
+  	<a-entity 
+  		teleport-controls="
+  			cameraRig: #cameraRig; 
+  			teleportOrigin: #head;
+  			button: trigger;
+  			curveShootingSpeed:5;
+  			hitCylinderRadius:0.35;
+  			hitCylinderColor:#ffe2b3;
+  			curveHitColor:#ffe2b3;
+  			curveMissColor:#c3123c;
+  			collisionEntities: #platform
+  			"
+  		gearvr-controls="
+  			armModel: true;
+  			buttonColor: red;
+  			buttonTouchedColor: yellow;
+  			buttonHighlightColor: green;
+  			hand: right;
+  			model: true;
+  			rotationOffset: 0			
+  			" 
+  		laser-controls
+  
+  		raycaster="showLine: true; far: 100" 
+  		line="color: orange; opacity: 0.75"
+  	></a-entity>
+  
+  </a-entity></a-scene>
+  </body>
+</html>
