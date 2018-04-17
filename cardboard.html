@@ -278,9 +278,9 @@
       <img id="smartwanlabel-bm" src="assets/static/images/smartwan/smartwanlabel-bm.png" />
       <img id="smartwanlabel" src="assets/static/images/smartwan/smartwanlabel.png" />
       
-      <img id="smartwan-lid-ext" src="assets/static/images/smartwan/smartwan-lid-ext.gif" />
-      <img id="smartwan-lid-int" src="assets/static/images/smartwan/smartwan-lid-int.gif" />
-      <img id="smartwan-box-int" src="assets/static/images/smartwan/smartwan-box-int.gif" />
+      <img id="smartwan-lid-ext" src="assets/static/images/smartwan/smartwanlidext.gif" />
+      <img id="smartwan-lid-int" src="assets/static/images/smartwan/smartwanlidint.gif" />
+      <img id="smartwan-box-int" src="assets/static/images/smartwan/smartwanboxint.gif" />
       <!-- end SmartWan -->
       
       <!-- Chime -->
@@ -2581,7 +2581,7 @@
           >        
           <a-entity id="smartwan-inside"
               geometry="primitive:plane; height: 0.5; width: 1.4;" 
-              material="shader:gif; src:#smartwan-box-int;"
+              material="shader:flat; src:#smartwanboxint;"
               position="0 0 0.11"
           ></a-entity>
   
@@ -2604,13 +2604,13 @@
               >   
               <a-entity id="lidinside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="color:#fff; src:#smartwan-lid-int;"
+                  material="shader:flat; src:#smartwanlidint;"
                   position="0 0.250 0"
                   rotation="180 0 0"
               ></a-entity>
               <a-entity id="lidoutside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="color:#fff; src:#smartwan-lid-ext;"
+                  material="shader:flat; src:#smartwanlidext;"
                   position="0 0.250 0"
                   rotation="0 0 0"
               ></a-entity>
