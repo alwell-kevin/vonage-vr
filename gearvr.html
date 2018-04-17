@@ -28,7 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- GAR Tracking -->
-    <script src="https://poc.virtuleap.com/library/gar-calculator-aframe.min.js"></script> 
+    <script src="https://poc.virtuleap.com/library/gar-calculator-aframe.v1.0.min.js"></script> 
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98983582-2"></script>
@@ -196,15 +196,6 @@
       
       
       <!-- AUDIO -->
-      
-      <!-- <audio id="background-snd" src="assets/static/audio/music.mp3" preload="auto"></audio>
-      <audio id="panel-btn-hover-snd" src="assets/static/audio/hover.mp3" preload="auto"></audio>
-      <audio id="panel-btn-click-snd" src="assets/static/audio/click1.mp3" preload="auto"></audio>
-      <audio id="teleport-snd" src="assets/static/audio/teleport.mp3" preload="auto"></audio>
-      <audio id="trunk-open-snd" src="assets/static/audio/trunk.mp3" preload="auto"></audio>
-      <audio id="trunk-coin-snd" src="assets/static/audio/coin.mp3" preload="auto"></audio>
-       -->
-       
       <a-asset-item id="background-snd" src="assets/static/audio/music.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="panel-btn-hover-snd" src="assets/static/audio/hover.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item id="panel-btn-click-snd" src="assets/static/audio/click.mp3" response-type="arraybuffer"></a-asset-item>
@@ -294,9 +285,9 @@
       <img id="smartwanlabel-bm" src="assets/static/images/smartwan/smartwanlabel-bm.png" />
       <img id="smartwanlabel" src="assets/static/images/smartwan/smartwanlabel.png" />
       
-      <img id="smartwan-lid-ext" src="assets/static/images/ani/smartwan-lid-ext.gif" />
-      <img id="smartwan-lid-int" src="assets/static/images/ani/smartwan-lid-int.gif" />
-      <img id="smartwan-box-int" src="assets/static/images/ani/smartwan-box-int.gif" />
+      <img id="smartwan-lid-ext" src="assets/static/images/smartwan/smartwan-lid-ext.gif" />
+      <img id="smartwan-lid-int" src="assets/static/images/smartwan/smartwan-lid-int.gif" />
+      <img id="smartwan-box-int" src="assets/static/images/smartwan/smartwan-box-int.gif" />
       <!-- end SmartWan -->
       
       <!-- Chime -->
@@ -418,14 +409,6 @@
   		autoplay:false; 
   		loop:false"
   ></a-entity>
-  
-  <a-entity id="teleportsound" 
-  	sound="
-  		src: #teleport-snd; 
-  		autoplay:false; 
-  		loop:false"
-  ></a-entity>
-  
   
   <a-entity id="trunkopensound" 
   	sound="
@@ -1534,7 +1517,7 @@
       ></a-entity>
       <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
       <!-- end LABEL -->
-  </a-entity>BEGIN CONTACT CENTER  -->
+  </a-entity><!-- BEGIN CONTACT CENTER  -->
   <a-entity id="contact-center" position="-7.4 0.5 -4.3">
     <a-entity 
       obj-model="obj: #contactcenter-obj; mtl: #contactcenter-mtl"
@@ -2471,7 +2454,7 @@
     <a-entity mixin="modelplatform" material="src: #labelplatform"></a-entity>
     <!-- end LABEL -->
   </a-entity>        
-  <!-- END CONTACT CENTER<!-- CRM -->
+  <!-- END CONTACT CENTER --><!-- CRM -->
   <a-entity id="crm"
     position="-8 0 2.25"
   >
