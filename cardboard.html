@@ -2604,13 +2604,13 @@
               >   
               <a-entity id="lidinside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="shader:gif; src:#smartwan-lid-int;"
+                  material="color:#fff; src:#smartwan-lid-int;"
                   position="0 0.250 0"
                   rotation="180 0 0"
               ></a-entity>
               <a-entity id="lidoutside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="shader:gif; src:#smartwan-lid-ext;"
+                  material="color:#fff; src:#smartwan-lid-ext;"
                   position="0 0.250 0"
                   rotation="0 0 0"
               ></a-entity>
@@ -3603,14 +3603,14 @@
         src="#intro-cardboard" height="1" radius="1.5" theta-start="145" theta-length="70"
         rotation="0 0 0"
         scale="1 1 1"
-        animation__startbounce="
+        animation="
             property: scale; 
             from: 1 1 1; 
             to: 0 0 0; 
             delay: 0; 
             dur: 500; 
             easing: easeInOutQuad; 
-            startEvents: click;
+            startEvents: closeintro;
             autoplay: false"          
       ></a-curvedimage>
     </a-entity>
