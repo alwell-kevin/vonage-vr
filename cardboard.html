@@ -30,15 +30,15 @@
     
     <!-- GAR Tracking -->
     <script src="https://poc.virtuleap.com/library/gar-calculator-aframe.v1.0.min.js"></script> 
-       
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98983582-2"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        // Google Analytics
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      gtag('config', 'UA-98983582-2');
+        ga('create', 'UA-98983582-2', 'auto');
+        ga('send', 'pageview');
     </script>
 
   </head>
@@ -278,9 +278,9 @@
       <img id="smartwanlabel-bm" src="assets/static/images/smartwan/smartwanlabel-bm.png" />
       <img id="smartwanlabel" src="assets/static/images/smartwan/smartwanlabel.png" />
       
-      <img id="smartwan-lid-ext" src="assets/static/images/smartwan/smartwanlidext.gif" />
-      <img id="smartwan-lid-int" src="assets/static/images/smartwan/smartwanlidint.gif" />
-      <img id="smartwan-box-int" src="assets/static/images/smartwan/smartwanboxint.gif" />
+      <img id="smartwanlidext" src="assets/static/images/smartwan/smartwanlidext.gif" />
+      <img id="smartwanlidint" src="assets/static/images/smartwan/smartwanlidint.gif" />
+      <img id="smartwanboxint" src="assets/static/images/smartwan/smartwanboxint.gif" />
       <!-- end SmartWan -->
       
       <!-- Chime -->
@@ -2581,7 +2581,7 @@
           >        
           <a-entity id="smartwan-inside"
               geometry="primitive:plane; height: 0.5; width: 1.4;" 
-              material="shader:flat; src:#smartwanboxint;"
+              material="color:#fff; shader:gif; src:#smartwanboxint;"
               position="0 0 0.11"
           ></a-entity>
   
@@ -2604,13 +2604,13 @@
               >   
               <a-entity id="lidinside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="shader:flat; src:#smartwanlidint;"
+                  material="color:#fff; shader:gif; src:#smartwanlidint;"
                   position="0 0.250 0"
                   rotation="180 0 0"
               ></a-entity>
               <a-entity id="lidoutside"
                   geometry="primitive:plane; height: 0.5; width: 1.4;" 
-                  material="shader:flat; src:#smartwanlidext;"
+                  material="color:#fff; shader:gif; src:#smartwanlidext;"
                   position="0 0.250 0"
                   rotation="0 0 0"
               ></a-entity>
@@ -3636,38 +3636,21 @@
       material="color:#fff; transparent:true; src: #ucaascpaaslabel"
     ></a-entity>
   
-    <a-entity rotation="150 0 0">
-      <a-entity checkpointspot="rayobj:clickable"></a-entity>
-    </a-entity>
-    
     <a-entity ui-console="product:ucaas; rig:#cameraRig; triggered:true"
-      visible="false"
-      position="0 0 0"
-      rotation="0 0 0"
-      video-controls="videoSrcURL: #avid_ucaas;" 
-      class="clickable"   
+      id="ucaascontainer"
     >
-      <a-video  id="avid_ucaas" 
-                src="#ucaas_video" 
-                width="2.84" 
-                height="1.60"
-                position="0 -2.25 0.75"
-                rotation="40 0 0"
-                scale="1 1 1"
-                watching-video 
-                class="clickable"   
-      >    
-      </a-video>
       <a-entity panelbtn="
+          width:1.5;
+          height:0.25;
           base:#bookmark-btn-label; 
           hover:#bookmark-btn-label-hover; 
           click:#bookmark-btn-label-click; 
           clickAction:bookmarkucaas;
           toggle:true
         "
-        position="0 -2.974 0.154"
+        class="clickable" 
+        position="0 -0.5 0.2"
         rotation="40 0 0"
-        scale="2 2 2"
       >      
       </a-entity>
     </a-entity>
